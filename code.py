@@ -6,8 +6,8 @@ import analogio
 
 # LED strip configuration:
 LED_COUNT = 10  # Number of LED pixels.
-LED_PIN_BLUE = board.GP1  # GPIO pin connected to the Blue LED strip.
-LED_PIN_BLUE_TWO = board.GP2  # GPIO pin connected to the second Blue LED strip.
+LED_PIN_BLUE = board.GP2  # GPIO pin connected to the Blue LED strip.
+LED_PIN_BLUE_TWO = board.GP3  # GPIO pin connected to the second Blue LED strip.
 POTENTIOMETER_PIN = board.GP26  # GPIO pin connected to the potentiometer for speed.
 COLOR_POTENTIOMETER_PIN = board.GP27  # GPIO pin connected to the potentiometer for color.
 
