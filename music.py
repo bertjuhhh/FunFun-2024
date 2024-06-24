@@ -12,6 +12,7 @@ from TimedEvent import TimedEvent
 # Configuration
 MP3_FILE_1 = "Pauzemuziek Getooid.mp3"
 MP3_FILE_2 = "bewoonddef.mp3"
+
 Knop_volgende = 7 #14
 Knop_mode = 8 #15
 Knop_vorige = 9
@@ -49,6 +50,7 @@ print("GPIO pins configured")
 
 # Initialize pygame mixer
 pygame.mixer.init()
+
 print("Pygame mixer initialized")
 
 # UART configuration
@@ -56,20 +58,31 @@ ser = serial.Serial('/dev/serial0', 9600)
 print("UART initialized")
 
 lcd.clear() # beeldscherm leeg maken
-previous_lcd_message = ""
-
+previous_lcd_message = ("", "")
+active_song = MP3_FILE_1
 
 def knop_volgende_event():
-    print("Volgende nummer")
+    print("Trigger Bewoondef")
     pygame.mixer.music.stop()
     pygame.mixer.music.load(MP3_FILE_2)
     pygame.mixer.music.play()
+    
+    active_song = MP3_FILE_2
+    
+    writeLCD_line_2("Gestart> Bewoonddef")
     
 def knop_mode_event():
     print("Mode knop")
     
 def knop_vorige_event():  
-    print("Vorige nummer")  
+    print("Vorige nummer")
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load(MP3_FILE_1)
+    pygame.mixer.music.play()
+    
+    active_song = MP3_FILE_1  
+    
+    writeLCD_line_2("Gestart> Pauzemuziek")
     
 def knop_play_pauze_event():
     print("Play/Pauze")
@@ -103,10 +116,7 @@ def sendCommand(event: TimedEvent, startOrStop: str):
     
     return True
 
-def writeLCD(line_1: str, line_2: str):
-    if (line_1 == "" and line_2 == ""):
-        return
-    
+def writeLCD(line_1: str, line_2: str):       
     message = line_1 + "\n" + line_2
     
     if (message == previous_lcd_message):
@@ -116,6 +126,12 @@ def writeLCD(line_1: str, line_2: str):
     lcd.message = message
     
     previous_lcd_message = message
+    
+def writeLCD_line_1(line_1: str):
+    writeLCD(line_1, previous_lcd_message[1])
+    
+def writeLCD_line_2(line_2: str):
+    writeLCD(previous_lcd_message[0], line_2)
 
 def main():
     startTime = time.time()
@@ -124,7 +140,16 @@ def main():
     
     # Main loop
     while True:
+        # Loop the music
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load(active_song)
+            pygame.mixer.music.play()
+            startTime = time.time() * 1000
+            
         currentTime = time.time() * 1000
+        
+        # On the first line of the LCD, display the current song, together with how long it has been playing
+        writeLCD_line_1(f"{MP3_FILE_1} {int(currentTime - startTime)}s")
         
         # Check for button presses
         for button in buttonEvents:
@@ -141,10 +166,12 @@ def main():
             # The event has not started and should start
             if (event.shouldStart(currentTime, startTime) and not event.hasStarted):
                 sendCommand(event, "START")
+                writeLCD_line_2(f"{event.group}> START {event.effect}")
                 
             # The event has started and should stop
             if (event.shouldStop(currentTime, startTime) and not event.hasStopped):
                 sendCommand(event, "STOP")
+                writeLCD_line_2(f"{event.group}> STOP {event.effect}")
                 
             # Sleep for 10ms
             time.sleep(0.01)
