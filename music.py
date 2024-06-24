@@ -4,16 +4,18 @@ import RPi.GPIO as GPIO
 import adafruit_character_lcd.character_lcd as characterlcd
 import board
 import digitalio
+import serial
+from eventLoop import eventLoop
+from TimedEvent import TimedEvent
+
 
 # Configuration
 MP3_FILE_1 = "Pauzemuziek Getooid.mp3"
 MP3_FILE_2 = "bewoonddef.mp3"
-GPIO1_PIN = 7
-GPIO2_PIN = 8
-CONTROL_PIN_1 = 14
-CONTROL_PIN_2 = 15
-PROGRAM_PIN_1 = 9
-PROGRAM_PIN_2 = 11
+Knop_volgende = 7 #14
+Knop_mode = 8 #15
+Knop_vorige = 9
+Knop_play_pauze = 11
 
 # LCD configuration
 lcd_columns = 16
@@ -39,116 +41,114 @@ print("LCD initialized")
 time.sleep(0.5)
 
 # Setup GPIO pins
-GPIO.setup(GPIO1_PIN, GPIO.OUT, initial=GPIO.HIGH)
-GPIO.setup(GPIO2_PIN, GPIO.OUT, initial=GPIO.HIGH)
-GPIO.setup(CONTROL_PIN_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(CONTROL_PIN_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(PROGRAM_PIN_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(PROGRAM_PIN_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(Knop_volgende, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(Knop_mode, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(Knop_vorige, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(Knop_play_pauze, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 print("GPIO pins configured")
 
 # Initialize pygame mixer
 pygame.mixer.init()
 print("Pygame mixer initialized")
 
-# Timestamps for GPIO actions (in seconds)
-GPIO1_ON_TIMES = [0, 60, 120]
-GPIO1_OFF_TIMES = [20, 80, 140]
-GPIO2_ON_TIMES = [30, 90, 150]
-GPIO2_OFF_TIMES = [50, 110, 180]
+# UART configuration
+ser = serial.Serial('/dev/serial0', 9600)
+print("UART initialized")
 
-def is_within_time_ranges(elapsed_time, on_times, off_times):
-    for on, off in zip(on_times, off_times):
-        if on <= elapsed_time < off:
-            return True
-    return False
+lcd.clear() # beeldscherm leeg maken
+previous_lcd_message = ""
 
-def control_gpio(elapsed_time):
-    # Initialize lcd_line_2 with a default value
-    lcd_line_2 = "nu ffe niks"
 
-    # Control GPIO1
-    if is_within_time_ranges(elapsed_time, GPIO1_ON_TIMES, GPIO1_OFF_TIMES):
-        GPIO.output(GPIO1_PIN, GPIO.LOW)  # Active low
-        lcd_line_2 = "Programma 1"
-    else:
-        GPIO.output(GPIO1_PIN, GPIO.HIGH)
-
-    # Control GPIO2
-    if is_within_time_ranges(elapsed_time, GPIO2_ON_TIMES, GPIO2_OFF_TIMES):
-        GPIO.output(GPIO2_PIN, GPIO.LOW)  # Active low
-        lcd_line_2 = "Programma 2"
-    else:
-        GPIO.output(GPIO2_PIN, GPIO.HIGH)
+def knop_volgende_event():
+    print("Volgende nummer")
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load(MP3_FILE_2)
+    pygame.mixer.music.play()
     
-    return lcd_line_2
+def knop_mode_event():
+    print("Mode knop")
+    
+def knop_vorige_event():  
+    print("Vorige nummer")  
+    
+def knop_play_pauze_event():
+    print("Play/Pauze")
+    if pygame.mixer.music.get_busy():
+        pygame.mixer.music.pause()
+    else:
+        pygame.mixer.music.unpause()
 
-try:
-    current_mp3 = None
-    previous_lcd_message = ("", "")
-    lcd_line_2 = "nu ffe niks"
+buttonEvents = [{
+    "pin": Knop_volgende,
+    "callback": knop_volgende_event
+}, {
+    "pin": Knop_mode,
+    "callback": knop_mode_event
+}, {
+    "pin": Knop_vorige,
+    "callback": knop_vorige_event
+}, {
+    "pin": Knop_play_pauze,
+    "callback": knop_play_pauze_event
+}]
+
+def sendCommand(event: TimedEvent, startOrStop: str):
+    # Format the command and send it to the Pico
+    # Format example: "START DMX1 TWINKLE rgb(255, 0, 0)"
+    command = event.formatCommand()
+    command = f"{startOrStop} {command}"
+    
+    ser.write(command.encode())
+    print(f"Command sent: {command}")
+    
+    return True
+
+def writeLCD(line_1: str, line_2: str):
+    if (line_1 == "" and line_2 == ""):
+        return
+    
+    message = line_1 + "\n" + line_2
+    
+    if (message == previous_lcd_message):
+        return
+    
     lcd.clear()
-    print("LCD cleared")
+    lcd.message = message
     
+    previous_lcd_message = message
+
+def main():
+    startTime = time.time()
+    # Convert starttime to ms
+    startTime = startTime * 1000
+    
+    # Main loop
     while True:
-        lcd_line_1 = "Stopped"
+        currentTime = time.time() * 1000
         
-        if GPIO.input(CONTROL_PIN_1) == GPIO.LOW:  # Active low
-            if current_mp3 != MP3_FILE_1:
-                pygame.mixer.music.load(MP3_FILE_1)
-                pygame.mixer.music.play(-1)  # Play on repeat
-                current_mp3 = MP3_FILE_1
-                start_time = time.time()
-                print(f"Playing {MP3_FILE_1}")
+        # Check for button presses
+        for button in buttonEvents:
+            if GPIO.input(button["pin"]) == 0:
+                button["callback"]()
+                time.sleep(0.2)
         
-        elif GPIO.input(CONTROL_PIN_2) == GPIO.LOW:  # Active low
-            if current_mp3 != MP3_FILE_2:
-                pygame.mixer.music.load(MP3_FILE_2)
-                pygame.mixer.music.play(-1)  # Play on repeat
-                current_mp3 = MP3_FILE_2
-                start_time = time.time()
-                print(f"Playing {MP3_FILE_2}")
+        # Check for timed events
+        for event in eventLoop:
+            # Event has already stopped, so we can skip it
+            if (event.hasStopped == True):
+                continue
+            
+            # The event has not started and should start
+            if (event.shouldStart(currentTime, startTime) and not event.hasStarted):
+                sendCommand(event, "START")
+                
+            # The event has started and should stop
+            if (event.shouldStop(currentTime, startTime) and not event.hasStopped):
+                sendCommand(event, "STOP")
+                
+            # Sleep for 10ms
+            time.sleep(0.01)
         
-        if GPIO.input(PROGRAM_PIN_1) == GPIO.LOW:  # Active low
-            pygame.mixer.music.stop()
-            current_mp3 = None
-            GPIO.output(GPIO1_PIN, GPIO.LOW)  # Activate GPIO1
-            GPIO.output(GPIO2_PIN, GPIO.HIGH) # Deactivate GPIO2
-            lcd_line_1 = "Stopped"
-            lcd_line_2 = "Programma 1"
-            start_time = None
-            print("Programma 1 activated")
         
-        elif GPIO.input(PROGRAM_PIN_2) == GPIO.LOW:  # Active low
-            pygame.mixer.music.stop()
-            current_mp3 = None
-            GPIO.output(GPIO2_PIN, GPIO.LOW)  # Activate GPIO2
-            GPIO.output(GPIO1_PIN, GPIO.HIGH) # Deactivate GPIO1
-            lcd_line_1 = "Stopped"
-            lcd_line_2 = "Programma 2"
-            start_time = None
-            print("Programma 2 activated")
-
-        if current_mp3:
-            elapsed_time = time.time() - start_time
-            lcd_line_1 = f"{current_mp3[:8]} {int(elapsed_time)}s"
-            lcd_line_2 = control_gpio(elapsed_time)
-            print(f"Elapsed time: {int(elapsed_time)} seconds", end="\r")
-        else:
-            print("Music stopped", end="\r")
-        
-        current_lcd_message = (lcd_line_1, lcd_line_2)
-        
-        if current_lcd_message != previous_lcd_message:
-            lcd.clear()
-            lcd.message = f"{lcd_line_1}\n{lcd_line_2}"
-            previous_lcd_message = current_lcd_message
-        
-        # Sleep for a short period to prevent high CPU usage
-        time.sleep(0.1)
-
-finally:
-    # Cleanup GPIO
-    GPIO.cleanup()
-    lcd.clear()
-    print("GPIO cleaned up and LCD cleared")
+# Run the main function
+main()
