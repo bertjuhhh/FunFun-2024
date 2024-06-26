@@ -111,7 +111,7 @@ def sendCommand(event: TimedEvent, startOrStop: str):
     command = event.formatCommand()
     command = f"{startOrStop} {command}"
     
-    print(f"Command sent: {command} on group: {event.group}")
+    print(f"Command sent: {startOrStop} {command} on group: {event.group}")
     ser.write(command.encode())
     
     return True
@@ -174,17 +174,13 @@ def main():
         for event in eventLoop:
             if event.hasStopped:
                 continue
-            
-            shouldStart = event.shouldStart(currentTime, startTime)
-            hasStarted = event.hasStarted
 
-
-            if shouldStart and not hasStarted:
+            if event.shouldStart(currentTime, startTime):
                 event.markStarted()
                 sendCommand(event, "START")
                 writeLCD_line_2(f"{event.group}> START {event.effect}")
                 
-            if event.shouldStop(currentTime, startTime) and not event.hasStopped:
+            if event.shouldStop(currentTime, startTime):
                 sendCommand(event, "STOP")
                 event.markStopped()
                 writeLCD_line_2(f"{event.group}> STOP {event.effect}")
