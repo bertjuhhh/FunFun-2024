@@ -196,10 +196,23 @@ def main():
                 if event.end > maxTime:
                     maxTime = event.end
                     
-            # Show the timeline header of every 500ms
-            for i in range(0, maxTime, 500):
-                sys.stdout.write(f"{i}ms -- ")
+            # Show the timeline header
+            header = "TIMELINE "
+            for i in range(0, maxTime + 1, 5000):
+                header += f"{i} --- "
+            print(header.strip())
             
+            # Print where the events are active in the timeline
+            timeline_length = maxTime // 1000  # in seconds
+            timeline_str = [" " * (timeline_length + 2)] * len(eventLoop)
+            
+            for idx, event in enumerate(eventLoop):
+                start_pos = event.start // 1000
+                end_pos = event.end // 1000
+                
+                timeline_str[idx] = timeline_str[idx][:start_pos] + "-" * (end_pos - start_pos + 1) + timeline_str[idx][end_pos + 1:]
+                print(f"{event.group.value} {event.effect.value} {' ' * start_pos}{timeline_str[idx][start_pos:end_pos + 1]}")
+                
             for event in eventLoop:
                 if event.hasStopped:
                     continue
@@ -212,8 +225,4 @@ def main():
                     sendCommand(event, "STOP", currentRelativeTime)
                     writeLCD_line_2(f"{event.group}> STOP {event.effect}")
                     
-                # Print where the event is active in the timeline
-                if event.start <= currentRelativeTime and event.end >= currentRelativeTime:
-                    sys.stdout.write(f"\n{event.group.value} {event.effect.value} {event.color} {event.start} - {event.end}")  
-
 main()

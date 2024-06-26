@@ -1,6 +1,11 @@
 # Documentatie
 Dit is de documentatie van het Fun Fun Lighting and Sound System. Hierin wordt beschreven hoe het systeem werkt en hoe het is opgebouwd.
 
+## Aanpassingen
+Om aanpassingen te doen aan de EventLoop open je dit bestand:
+
+- `Raspberry-Pi-1b/eventLoop.py`
+
 ## Verantwoordelijkheden
 Het systeem bevat 2 onderdelen die beiden verantwoordelijk zijn voor twee verschillende dingen. Deze verdeling zie je ook in de mappen.
 1. De Raspberry Pi Pico
