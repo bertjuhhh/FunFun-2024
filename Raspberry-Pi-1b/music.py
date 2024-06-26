@@ -196,8 +196,9 @@ def main():
                 if event.end > maxTime:
                     maxTime = event.end
                     
-            # Show the timeline header (0 ------ 500 --- max)
-            sys.stdout.write(f"0 {'-' * 500} {maxTime}\n")
+            # Show the timeline header of every 500ms
+            for i in range(0, maxTime, 500):
+                sys.stdout.write(f"{i // 1000}s ------")
             
             for event in eventLoop:
                 if event.hasStopped:
