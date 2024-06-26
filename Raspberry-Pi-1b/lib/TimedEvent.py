@@ -13,19 +13,12 @@ class TimedEvent:
         # 0 is infinite
         if (self.end == 0):
             return False
-                
         shouldStop = self.end <= relativeCurrentTime - relativeStartTime
-        if (shouldStop):
-            self.hasStopped = True
         return shouldStop
     
     def shouldStart(self, relativeCurrentTime, relativeStartTime):
-        print(f"Checking if event should start: {self.start} <= {relativeCurrentTime - relativeStartTime}")
         shouldStart = self.start <= relativeCurrentTime - relativeStartTime
-        print(f"Should Start: {shouldStart} | Has Started: {self.hasStarted} | Has Stopped: {self.hasStopped}")
-        
-        if (shouldStart):
-            self.hasStarted = True
+
         return shouldStart
         
     def isStarted(self):
@@ -36,3 +29,9 @@ class TimedEvent:
     
     def formatCommand(self):
         return f"{self.effect} {self.group.value} {self.color}"
+
+    def markStarted(self):
+        self.hasStarted = True
+
+    def markStopped(self)
+        self.haStopped = True

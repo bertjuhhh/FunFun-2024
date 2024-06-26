@@ -169,7 +169,7 @@ def main():
             
         currentTime = time.time() * 1000
         
-        writeLCD_line_1(f"{MP3_FILE_1} {int(currentTime - startTime)}s")
+        writeLCD_line_1(f"{MP3_FILE_1} {int((currentTime - startTime) / 1000)}s")
         
         for event in eventLoop:
             if event.hasStopped:
@@ -183,11 +183,13 @@ def main():
 
             if shouldStart and not hasStarted:
                 print("send")
+                event.markStarted()
                 sendCommand(event, "START")
                 writeLCD_line_2(f"{event.group}> START {event.effect}")
                 
             if event.shouldStop(currentTime, startTime) and not event.hasStopped:
                 sendCommand(event, "STOP")
+                event.markStopped()
                 writeLCD_line_2(f"{event.group}> STOP {event.effect}")
                 
             time.sleep(0.01)
