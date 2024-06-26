@@ -7,8 +7,6 @@ import digitalio
 import serial
 from eventLoop import eventLoop
 from lib.TimedEvent import TimedEvent
-import signal
-import sys
 
 # Configuration
 MP3_FILE_1 = "Main.mp3"
@@ -113,7 +111,7 @@ def sendCommand(event: TimedEvent, startOrStop: str, currentRelativeTime):
     command = event.formatCommand()
     command = f"{startOrStop} {command}"
     
-    print(f"{currentRelativeTime}ms | Command sent: {command} on group: {event.group.value}")
+    print(f"{currentRelativeTime} | Command sent: {command} on group: {event.group.value}")
     ser.write(command.encode())
     
     return True
@@ -142,23 +140,10 @@ def writeLCD_line_2(line_2: str):
     
     writeLCD(previous_lcd_message[0], line_2)
 
-def millis():
-    return int(time.time() * 1000)
-
-# Flag to control the main loop
-running = True
-
-def signal_handler(sig, frame):
-    global running
-    print("Interrupt received, stopping...")
-    running = False
-
 def main():
-    global active_song, running
-    startTime = millis()
-    
-    # Register the SIGINT handler
-    signal.signal(signal.SIGINT, signal_handler)
+    global active_song
+    startTime = time.time()
+    startTime = startTime * 1000
     
     # Log all registered events
     print("-------------------")
@@ -175,26 +160,22 @@ def main():
     print("Starting main loop...")
     print("Hi from bert")
     
-    pygame.init()
-    
     # Main loop
-    last_checked_time = millis()
-    
-    while running:
-        currentTime = millis()
-        
-        # Only proceed if enough time has passed (e.g., 10 ms)
-        if currentTime - last_checked_time >= 10:
-            last_checked_time = currentTime
+    while True:
+        last_time = time.time() * 1000
+        # Check for button presses
+        for buttonEvent in buttonEvents:
+            if not GPIO.input(buttonEvent["pin"]):
+                buttonEvent["callback"]()
+           
+        # Check every second
+        if (time.time() * 1000) - last_time >= 500:
+            last_time = time.time() * 1000
+            currentTime = time.time() * 1000
             
-            if not pygame.mixer.music.get_busy():
-                pygame.mixer.music.load(active_song)
-                pygame.mixer.music.play()
-                startTime = millis()
-                
             currentRelativeTime = int(currentTime - startTime)
             
-            writeLCD_line_1(f"{MP3_FILE_1} {int(currentRelativeTime / 1000)}s")
+            writeLCD_line_1(f"{MP3_FILE_1} {int((currentTime - startTime) / 1000)}s")
             
             for event in eventLoop:
                 if event.hasStopped:
@@ -207,13 +188,5 @@ def main():
                 if event.shouldStop(currentTime, startTime):
                     sendCommand(event, "STOP", currentRelativeTime)
                     writeLCD_line_2(f"{event.group}> STOP {event.effect}")
-        
-        # Process pygame events to keep the loop responsive
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
 
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()
+main()
