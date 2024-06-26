@@ -170,14 +170,13 @@ def main():
         
         writeLCD_line_1(f"{MP3_FILE_1} {int(currentTime - startTime)}s")
         
-        for button in buttonEvents:
-            if GPIO.input(button["pin"]) == 0:
-                button["callback"]()
-                time.sleep(0.2)
-        
         for event in eventLoop:
             if event.hasStopped:
+                print("Event has already stopped")
                 continue
+            
+            # Log event details
+            print(f"Event: {event.formatCommand()} | Start: {event.start} | End: {event.end} | Current time: {currentTime} | Start time: {startTime}")
             
             if event.shouldStart(currentTime, startTime) and not event.hasStarted:
                 sendCommand(event, "START")

@@ -20,6 +20,7 @@ class TimedEvent:
         return shouldStop
     
     def shouldStart(self, relativeCurrentTime, relativeStartTime):
+        print(f"Checking if event should start: {self.start} <= {relativeCurrentTime} - {relativeStartTime}")
         shouldStart = self.start <= relativeCurrentTime - relativeStartTime
         if (shouldStart):
             self.hasStarted = True
@@ -32,4 +33,4 @@ class TimedEvent:
         return self.hasStopped
     
     def formatCommand(self):
-        return f"{self.effect.value} {self.group.value} {self.color}"
+        return f"{self.effect} {self.group.value} {self.color}"
