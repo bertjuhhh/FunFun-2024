@@ -111,7 +111,7 @@ def sendCommand(event: TimedEvent, startOrStop: str):
     command = event.formatCommand()
     command = f"{startOrStop} {command}"
     
-    print(f"Command sent: {startOrStop} {command} on group: {event.group}")
+    print(f"Command sent: {command} on group: {event.group}")
     ser.write(command.encode())
     
     return True
