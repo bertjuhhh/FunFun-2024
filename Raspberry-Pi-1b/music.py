@@ -167,7 +167,7 @@ def main():
     print("Starting main loop...")
     print("Hi from bert")
     
-    last_time = millis()
+    last_time = 500000 # Make sure the first loop runs
     
     # Main loop
     while True:
