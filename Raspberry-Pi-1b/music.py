@@ -197,7 +197,7 @@ def main():
                     maxTime = event.end
                     
             # Show the timeline header
-            header = "TIMELINE "
+            header = "TIMELINE\t\t"
             for i in range(0, maxTime + 1, 5000):
                 header += f"{i}\t"
             print(header.strip())
@@ -211,7 +211,7 @@ def main():
                 end_pos = event.end // 1000
                 
                 timeline_str[idx] = timeline_str[idx][:start_pos] + "-" * (end_pos - start_pos + 1) + timeline_str[idx][end_pos + 1:]
-                print(f"{event.group.value} {event.effect.value}\t{timeline_str[idx]}")
+                print(f"{event.group.value} {event.effect.value}\t\t{timeline_str[idx]}")
                 
             for event in eventLoop:
                 if event.hasStopped:
