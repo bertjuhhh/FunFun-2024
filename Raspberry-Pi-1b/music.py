@@ -176,10 +176,13 @@ def main():
                 print("Event has already stopped")
                 continue
             
-            # Log event details
-            print(f"Event: {event.formatCommand()} | Start: {event.start} | End: {event.end} | Current time: {currentTime} | Start time: {startTime}")
-            
-            if event.shouldStart(currentTime, startTime) and not event.hasStarted:
+            shouldStart = event.shouldStart(currentTime, startTime)
+            hasStarted = event.hasStarted
+
+            print(f"shouldStart: {shouldStart} and hasStarted: {hasStarted}")
+
+            if shouldStart and not hasStarted:
+                print("send")
                 sendCommand(event, "START")
                 writeLCD_line_2(f"{event.group}> START {event.effect}")
                 
