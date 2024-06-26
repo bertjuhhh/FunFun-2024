@@ -2,5 +2,5 @@
 ./__pycache__/
 /.venv
 /lib/__pycache__
-/__pycache__
-/Raspberry-Pi-1b/.venv
+/Raspberry-Pi-1b/tests/__pycache__
+/Raspberry-Pi-1b/lib/__pycache__
