@@ -12,6 +12,6 @@ def addEvent(start, end, effect: Effect, group, color = None):
     
 # Times in milliseconds    
 # 0 = infinite
-addEvent(0, 0, Effect.STATIC, Groups.DMX1, yellow)
-addEvent(5000, 10000, Effect.RAINBOW, Groups.DMX1)
-addEvent(10000, 15000, Effect.RAINBOW_CYCLE, Groups.DMX1)
+addEvent(0, 0, Effect.STATIC, Groups.LEDKAST_1, yellow)
+addEvent(5000, 10000, Effect.RAINBOW, Groups.LEDKAST_1)
+addEvent(10000, 15000, Effect.RAINBOW_CYCLE, Groups.LEDKAST_1)

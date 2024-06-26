@@ -6,7 +6,7 @@ import board
 import digitalio
 import serial
 from eventLoop import eventLoop
-from TimedEvent import TimedEvent
+from lib.TimedEvent import TimedEvent
 
 
 # Configuration
@@ -112,7 +112,7 @@ def sendCommand(event: TimedEvent, startOrStop: str):
     command = f"{startOrStop} {command}"
     
     ser.write(command.encode())
-    print(f"Command sent: {command}")
+    print(f"Command sent: {command} on group: {event.group}")
     
     return True
 
