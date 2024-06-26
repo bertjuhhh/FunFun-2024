@@ -140,10 +140,12 @@ def writeLCD_line_2(line_2: str):
     
     writeLCD(previous_lcd_message[0], line_2)
 
+def millis():
+    return time.time() * 1000
+
 def main():
     global active_song
-    startTime = time.time()
-    startTime = startTime * 1000
+    startTime = millis()
     
     # Log all registered events
     print("-------------------")
@@ -162,16 +164,18 @@ def main():
     
     # Main loop
     while True:
-        last_time = time.time() * 1000
+        last_time = millis()
         # Check for button presses
         for buttonEvent in buttonEvents:
             if not GPIO.input(buttonEvent["pin"]):
                 buttonEvent["callback"]()
            
         # Check every second
-        if (time.time() * 1000) - last_time >= 500:
-            last_time = time.time() * 1000
-            currentTime = time.time() * 1000
+        print(f"{millis() - last_time}")
+        
+        if millis() - last_time >= 500:
+            last_time = millis()
+            currentTime = millis()
             
             currentRelativeTime = int(currentTime - startTime)
             
