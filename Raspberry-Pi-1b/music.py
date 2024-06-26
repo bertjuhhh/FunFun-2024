@@ -162,9 +162,10 @@ def main():
     print("Starting main loop...")
     print("Hi from bert")
     
+    last_time = millis()
+    
     # Main loop
     while True:
-        last_time = millis()
         # Check for button presses
         for buttonEvent in buttonEvents:
             if not GPIO.input(buttonEvent["pin"]):
