@@ -7,6 +7,8 @@ import digitalio
 import serial
 from eventLoop import eventLoop
 from lib.TimedEvent import TimedEvent
+import signal
+import sys
 
 # Configuration
 MP3_FILE_1 = "Main.mp3"
@@ -143,9 +145,20 @@ def writeLCD_line_2(line_2: str):
 def millis():
     return int(time.time() * 1000)
 
+# Flag to control the main loop
+running = True
+
+def signal_handler(sig, frame):
+    global running
+    print("Interrupt received, stopping...")
+    running = False
+
 def main():
-    global active_song
+    global active_song, running
     startTime = millis()
+    
+    # Register the SIGINT handler
+    signal.signal(signal.SIGINT, signal_handler)
     
     # Log all registered events
     print("-------------------")
@@ -160,25 +173,18 @@ def main():
     print(f"Current time: {startTime}")
     
     print("Starting main loop...")
-    
-    print("-------------------")
+    print("Hi from bert")
     
     pygame.init()
     
     # Main loop
-    running = True
     last_checked_time = millis()
     
     while running:
         currentTime = millis()
         
-        # Check for button events
-        for buttonEvent in buttonEvents:
-            if not GPIO.input(buttonEvent["pin"]):
-                buttonEvent["callback"]()
-        
-        # Only proceed if enough time has passed
-        if currentTime - last_checked_time >= 50:
+        # Only proceed if enough time has passed (e.g., 10 ms)
+        if currentTime - last_checked_time >= 10:
             last_checked_time = currentTime
             
             if not pygame.mixer.music.get_busy():
@@ -209,4 +215,5 @@ def main():
 
     pygame.quit()
 
-main()
+if __name__ == "__main__":
+    main()
