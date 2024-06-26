@@ -9,8 +9,8 @@ from eventLoop import eventLoop
 from lib.TimedEvent import TimedEvent
 
 # Configuration
-MP3_FILE_1 = "Pauzemuziek Getooid.mp3"
-MP3_FILE_2 = "bewoonddef.mp3"
+MP3_FILE_1 = "Main.mp3"
+MP3_FILE_2 = "Pauze.mp3"
 
 Knop_volgende = 7
 Knop_mode = 8
@@ -158,6 +158,7 @@ def main():
     print(f"Current time: {startTime}")
     
     print("Starting main loop...")
+    print("Hi from bert")
     
     # Main loop
     while True:
