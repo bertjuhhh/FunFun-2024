@@ -171,9 +171,7 @@ def main():
             if not GPIO.input(buttonEvent["pin"]):
                 buttonEvent["callback"]()
            
-        # Check every second
-        print(f"{millis() - last_time}")
-        
+        # Check every 500ms
         if millis() - last_time >= 500:
             last_time = millis()
             currentTime = millis()
