@@ -106,12 +106,12 @@ buttonEvents = [{
     "callback": knop_play_pauze_event
 }]
 
-def sendCommand(event: TimedEvent, startOrStop: str):
+def sendCommand(event: TimedEvent, startOrStop: str, currentRelativeTime):
     # Format the command and send it to the Pico
     command = event.formatCommand()
     command = f"{startOrStop} {command}"
     
-    print(f"Command sent: {command} on group: {event.group}")
+    print(f"{currentRelativeTime} | Command sent: {command} on group: {event.group.value}")
     ser.write(command.encode())
     
     return True
@@ -169,6 +169,8 @@ def main():
             
         currentTime = time.time() * 1000
         
+        currentRelativeTime = int(currentTime - startTime)
+        
         writeLCD_line_1(f"{MP3_FILE_1} {int((currentTime - startTime) / 1000)}s")
         
         for event in eventLoop:
@@ -176,11 +178,11 @@ def main():
                 continue
 
             if event.shouldStart(currentTime, startTime):
-                sendCommand(event, "START")
+                sendCommand(event, "START", currentRelativeTime)
                 writeLCD_line_2(f"{event.group}> START {event.effect}")
                 
             if event.shouldStop(currentTime, startTime):
-                sendCommand(event, "STOP")
+                sendCommand(event, "STOP", currentRelativeTime)
                 writeLCD_line_2(f"{event.group}> STOP {event.effect}")
                 
             time.sleep(0.01)
