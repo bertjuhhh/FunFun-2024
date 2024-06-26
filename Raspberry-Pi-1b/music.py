@@ -182,7 +182,6 @@ def main():
                 
             if event.shouldStop(currentTime, startTime):
                 sendCommand(event, "STOP")
-                event.markStopped()
                 writeLCD_line_2(f"{event.group}> STOP {event.effect}")
                 
             time.sleep(0.01)
