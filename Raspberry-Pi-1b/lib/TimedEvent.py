@@ -33,5 +33,5 @@ class TimedEvent:
     def markStarted(self):
         self.hasStarted = True
 
-    def markStopped(self)
+    def markStopped(self):
         self.haStopped = True
