@@ -6,6 +6,7 @@ import board
 import digitalio
 import serial
 from eventLoop import eventLoop
+import sys
 from lib.TimedEvent import TimedEvent
 
 # Configuration
@@ -185,6 +186,19 @@ def main():
             
             writeLCD_line_1(f"{MP3_FILE_1} {int((currentTime - startTime) / 1000)}s")
             
+            # Clear the console and print the current progress
+            sys.stdout.write("\033c")
+            sys.stdout.flush()
+            
+            # Calculate the max time for the event loop
+            maxTime = 0
+            for event in eventLoop:
+                if event.end > maxTime:
+                    maxTime = event.end
+                    
+            # Show the timeline header (0 ------ 500 --- max)
+            sys.stdout.write(f"0 {'-' * 500} {maxTime}\n")
+            
             for event in eventLoop:
                 if event.hasStopped:
                     continue
@@ -196,5 +210,9 @@ def main():
                 if event.shouldStop(currentTime, startTime):
                     sendCommand(event, "STOP", currentRelativeTime)
                     writeLCD_line_2(f"{event.group}> STOP {event.effect}")
+                    
+                # Print the event loop status
+                event_position = (currentRelativeTime - event.start) // 2000
+                sys.stdout.write(f"{event.group.value}: {'.' * event_position}+{'.' * (10 - event_position)}\n")
 
 main()
