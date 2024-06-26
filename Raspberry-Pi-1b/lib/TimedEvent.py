@@ -13,6 +13,7 @@ class TimedEvent:
         # 0 is infinite
         if (self.end == 0):
             return False
+        
         shouldStop = self.end <= relativeCurrentTime - relativeStartTime
         return shouldStop
     

@@ -173,16 +173,13 @@ def main():
         
         for event in eventLoop:
             if event.hasStopped:
-                print("Event has already stopped")
                 continue
             
             shouldStart = event.shouldStart(currentTime, startTime)
             hasStarted = event.hasStarted
 
-            print(f"shouldStart: {shouldStart} and hasStarted: {hasStarted}")
 
             if shouldStart and not hasStarted:
-                print("send")
                 event.markStarted()
                 sendCommand(event, "START")
                 writeLCD_line_2(f"{event.group}> START {event.effect}")
