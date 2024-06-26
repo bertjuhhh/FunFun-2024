@@ -22,6 +22,8 @@ class TimedEvent:
     def shouldStart(self, relativeCurrentTime, relativeStartTime):
         print(f"Checking if event should start: {self.start} <= {relativeCurrentTime - relativeStartTime}")
         shouldStart = self.start <= relativeCurrentTime - relativeStartTime
+        print(f"Should Start: {shouldStart} | Has Started: {self.hasStarted} | Has Stopped: {self.hasStopped}")
+        
         if (shouldStart):
             self.hasStarted = True
         return shouldStart
