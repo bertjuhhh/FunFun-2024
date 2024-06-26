@@ -111,11 +111,11 @@ def sendCommand(event: TimedEvent, startOrStop: str, currentRelativeTime):
     command = event.formatCommand()
     command = f"{startOrStop} {command}"
     
-    # If stop, make console color red
+    # If stop, make console color red else green
     if startOrStop == "STOP":
         print(f"\033[91m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
     else:
-        print(f"{currentRelativeTime} | Command sent: {command} on group: {event.group.value}")
+        print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
     
     ser.write(command.encode())
     
