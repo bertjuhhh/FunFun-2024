@@ -176,7 +176,6 @@ def main():
                 continue
 
             if event.shouldStart(currentTime, startTime):
-                event.markStarted()
                 sendCommand(event, "START")
                 writeLCD_line_2(f"{event.group}> START {event.effect}")
                 
