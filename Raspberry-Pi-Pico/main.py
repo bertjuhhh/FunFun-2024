@@ -46,9 +46,7 @@ def startUpSequence():
         kast.showStartupEffect()
     
 
-def main():
-    global chase_active, pulsate_active
-    
+def main():    
     print("🚀 Starting Raspberry Pi Pico...")
     startUpSequence()
     
@@ -68,10 +66,12 @@ def main():
             (startOrSop, ledkast, dmxEffect, rgbColor) = data.split("_")
             effect = Effect(dmxEffect, rgbColor)
             
-            if startOrSop == "START":
+            if startOrSop.upper() == "START":
                 startCommand(ledkast, effect)
             else:
                 stopCommand(ledkast)
+                
+        time.sleep(0.1)
 
 
 if __name__ == "__main__":
