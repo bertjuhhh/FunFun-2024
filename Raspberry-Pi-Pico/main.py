@@ -1,9 +1,13 @@
 import time
 from machine import Pin, ADC, UART
-from config import getLedkast, getAllLedkasts, UART_BAUDRATE, UART_TX_PIN, UART_RX_PIN, EXTERNAL_INDICATORS
+from config import getLedkast, getAllLedkastsExceptExternal, getAllLedkasts, UART_BAUDRATE, UART_TX_PIN, UART_RX_PIN, EXTERNAL_INDICATORS, POTENTIOMETER_PIN
 
 from lib.Ledkast import Ledkast
 from lib.Effect import Effect
+
+
+# Initialize POT meter
+pot = ADC(Pin(POTENTIOMETER_PIN))
 
 # Initialize UART (UART0 in Raspberry Pi Pico)
 uart = UART(1, baudrate=UART_BAUDRATE, tx=Pin(UART_TX_PIN), rx=Pin(UART_RX_PIN))
@@ -46,20 +50,41 @@ def startUpSequence():
         kast.showStartupEffect()
     
 # This displays the status on the external indicators in the following:
-# The led strip has 10 leds, 2 for each group. 
-# The first led displays if a group ios active in green, the second mimicks the color of the group.
+# When rotating the POT meter, it switches between the different LEDKASTS, previewing them on the hoofdkast
+# We have four groups so the pot meter is divided into four sections
 def showStatus():
     indicatorStrip = EXTERNAL_INDICATORS.strips
+    ledkasten = getAllLedkastsExceptExternal()
     
-    for i in range(10):
-        indicatorStrip[i] = (0, 0, 0)
+    potValue = pot.read_u16()
+    potValue = potValue / 65535  # Normalize pot value to range 0-1
     
-    for i, kast in enumerate(getAllLedkasts()):
-        if kast.isActive:
-            indicatorStrip[i * 2] = (0, 255, 0)
-            indicatorStrip[i * 2 + 1] = kast.strips[0]
-            
+    selectedIndex = 0
+    
+    # Determine the selected LEDKAST based on the pot value
+    if potValue < 0.25:
+        selectedIndex = 0
+    elif potValue < 0.5:
+        selectedIndex = 1
+    elif potValue < 0.75:
+        selectedIndex = 2
+    else:
+        selectedIndex = 3
+    
+    ledkast = ledkasten[selectedIndex]
+    
+    # Represent the selected LEDKAST index in binary on the first two LEDs
+    binary = "{0:b}".format(selectedIndex).zfill(2)
+    
+    for i in range(2):
+        indicatorStrip[i] = (255, 255, 255) if binary[i] == "1" else (0, 0, 0)
+    
+    # Preview the first 10 LEDs of the selected LEDKAST on the indicator strip
+    for i in range(2, 10):
+        indicatorStrip[i] = ledkast.strips[i] if i < len(ledkast.strips) else (0, 0, 0)
+        
     indicatorStrip.show()
+
     
 def showError():
     indicatorStrip = EXTERNAL_INDICATORS.strips
