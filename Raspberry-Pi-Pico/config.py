@@ -12,6 +12,7 @@ LEDKAST_1 = Ledkast(board.GP2, 10)
 LEDKAST_2 = Ledkast(board.GP3, 10)
 LEDKAST_3 = Ledkast(board.GP4, 10) # Check this
 LEDKAST_4 = Ledkast(board.GP5, 10) # Check this
+EXTERNAL_INDICATORS = Ledkast(board.GP2, 10)
 
 def getLedkast(group: str) -> Optional[Ledkast]:
     if group == "LEDKAST_1":
@@ -26,4 +27,4 @@ def getLedkast(group: str) -> Optional[Ledkast]:
         return None
     
 def getAllLedkasts() -> list[Ledkast]:
-    return [LEDKAST_1, LEDKAST_2, LEDKAST_3, LEDKAST_4]
+    return [LEDKAST_1, LEDKAST_2, LEDKAST_3, LEDKAST_4, EXTERNAL_INDICATORS]

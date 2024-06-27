@@ -166,7 +166,6 @@ def main():
     print(f"Current time: {startTime}")
     
     print("Starting main loop...")
-    print("Hi from bert")
     
     last_time = 500000 # Make sure the first loop runs
     
@@ -184,7 +183,7 @@ def main():
             
             currentRelativeTime = int(currentTime - startTime)
             
-            writeLCD_line_1(f"{MP3_FILE_1} {int((currentTime - startTime) / 1000)}s")
+            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {MP3_FILE_1}")
                 
             for event in eventLoop:
                 if event.hasStopped:
