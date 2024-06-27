@@ -1,23 +1,29 @@
 import board
-import neopixel
+from lib.Ledkast import Ledkast
+from typing import Optional
 
-# LED strip configuration:
-LED_COUNT = 10
-LED_PIN_BLUE = board.GP2
-LED_PIN_BLUE_TWO = board.GP3
 POTENTIOMETER_PIN = board.GP26
 COLOR_POTENTIOMETER_PIN = board.GP27
 INPUT_PIN = board.GP15
 INPUT_PIN1 = board.GP14
 
-# Create NeoPixel objects
-ledsBlue = neopixel.NeoPixel(LED_PIN_BLUE, LED_COUNT, auto_write=False)
-ledsBlueTwo = neopixel.NeoPixel(LED_PIN_BLUE_TWO, LED_COUNT, auto_write=False)
+# Create Ledkast objects
+LEDKAST_1 = Ledkast(board.GP2, 10)
+LEDKAST_2 = Ledkast(board.GP3, 10)
+LEDKAST_3 = Ledkast(board.GP4, 10) # Check this
+LEDKAST_4 = Ledkast(board.GP5, 10) # Check this
 
-# Chase light config
-LED_ON_OFF_COUNT = 20
-SPACING = 18
-
-# Pulsating config
-interval = 5
-minBrightness = 20
+def getLedkast(group: str) -> Optional[Ledkast]:
+    if group == "LEDKAST_1":
+        return LEDKAST_1
+    elif group == "LEDKAST_2":
+        return LEDKAST_2
+    elif group == "LEDKAST_3":
+        return LEDKAST_3
+    elif group == "LEDKAST_4":
+        return LEDKAST_4
+    else:
+        return None
+    
+def getAllLedkasts() -> list[Ledkast]:
+    return [LEDKAST_1, LEDKAST_2, LEDKAST_3, LEDKAST_4]

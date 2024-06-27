@@ -8,8 +8,8 @@ Om aanpassingen te doen aan de EventLoop open je dit bestand:
 
 ## Verantwoordelijkheden
 Het systeem bevat 2 onderdelen die beiden verantwoordelijk zijn voor twee verschillende dingen. Deze verdeling zie je ook in de mappen.
-1. De Raspberry Pi Pico
 2. De Raspberry Pi 1b
+1. De Raspberry Pi Pico
 
 ### Raspberry Pi Pico
 De Raspberry Pi Pico is verantwoordelijk voor het aansturen van de LED strip. Dit doet hij door middel van een PWM signaal via de GPIO pinnen. De Pico ontvangt commando's van de Raspberry Pi 1b via een seriële verbinding.

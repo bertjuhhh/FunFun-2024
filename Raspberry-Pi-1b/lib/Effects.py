@@ -12,4 +12,6 @@ class Effect(Enum):
     FADE = "FADE"
     TWINKLE = "TWINKLE"
     FLASH = "FLASH"
+    PULSATE = "PULSATE"
+    CHASE = "CHASE"
     

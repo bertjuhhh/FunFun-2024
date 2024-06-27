@@ -1,26 +1,26 @@
 import time
-from config import LED_COUNT, ledsBlue, ledsBlueTwo, interval, minBrightness
+from config import LED_COUNT
 
 previousMillis = 0
 brightness = 255
 fadeAmount = -4
+interval = 5
+minBrightness = 20
 
-def pulsateLEDs(color):
-    global previousMillis, brightness, fadeAmount
-    currentMillis = time.monotonic() * 1000
-    if currentMillis - previousMillis >= interval:
-        previousMillis = currentMillis
-        brightness += fadeAmount
+def pulsateLEDs(strip, isRunning, color):
+    while isRunning:
+        currentMillis = time.monotonic() * 1000
+    
+        if currentMillis - previousMillis >= interval:
+            previousMillis = currentMillis
+            brightness += fadeAmount
 
-        if brightness <= minBrightness or brightness >= 255:
-            fadeAmount = -fadeAmount
+            if brightness <= minBrightness or brightness >= 255:
+                fadeAmount = -fadeAmount
 
-        for i in range(LED_COUNT):
-            ledsBlue[i] = color
-            ledsBlueTwo[i] = color
+            for i in range(LED_COUNT):
+                strip[i] = color
 
-        ledsBlue.brightness = brightness / 255.0
-        ledsBlueTwo.brightness = brightness / 255.0
+            strip.brightness = brightness / 255.0
 
-        ledsBlue.show()
-        ledsBlueTwo.show()
+            strip.show()
