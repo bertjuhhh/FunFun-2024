@@ -1,6 +1,6 @@
 import time
 
-from pulsate_leds import pulsateLEDs
+from effects.pulsate_leds import pulsateLEDs
 
 def startUpEffect(strip):
     for i in range(5):
