@@ -1,11 +1,11 @@
 from lib.Ledkast import Ledkast
-from typing import Optional
-
+#from typing import Optional
+from machine import Pin 
 # Used for switching between the different LEDKASTS previewing them on the hoofdkast
-POTENTIOMETER_PIN = board.GP26
+POTENTIOMETER_PIN = 26
 
 # Not used currently
-COLOR_POTENTIOMETER_PIN = board.GP27
+COLOR_POTENTIOMETER_PIN = 27
 
 # Serial monitor
 UART_TX_PIN = 4
@@ -13,13 +13,16 @@ UART_RX_PIN = 5
 UART_BAUDRATE = 9600
 
 # Create Ledkast objects
-LEDKAST_1 = Ledkast(board.GP0, 10)
-LEDKAST_2 = Ledkast(board.GP1, 10)
-LEDKAST_3 = Ledkast(board.GP2, 10) # Check this
-LEDKAST_4 = Ledkast(board.GP3, 10) # Check this
-
+#LEDKAST_1 = 0,10#Ledkast(board.GP0, 10) #is fout (geen board.gp gebruiken)
+#LEDKAST_2 = 1,10#Ledkast(board.GP1, 10) #is fout (geen board.gp gebruiken)
+#LEDKAST_3 = 2,10#Ledkast(board.GP2, 10) #is fout (geen board.gp gebruiken)
+#LEDKAST_4 = 3,10#Ledkast(board.GP3, 10) #is fout (geen board.gp gebruiken)
+LEDKAST_1 = Ledkast(pin=0, ledCount=10)  # weet niet of dit helemaal goed is
+LEDKAST_2 = Ledkast(pin=1, ledCount=10)  # weet niet of dit helemaal goed is
+LEDKAST_3 = Ledkast(pin=2, ledCount=10)  # weet niet of dit helemaal goed is
+LEDKAST_4 = Ledkast(pin=3, ledCount=10)  # weet niet of dit helemaal goed is
 # Indicators that are present on the hoofdkast
-EXTERNAL_INDICATORS = Ledkast(board.GP6, 10)
+EXTERNAL_INDICATORS = Ledkast(pin=6, ledCount=10)# Ledkast(board.GP6, 10) ool checken
 
 def getLedkast(group: str) -> Optional[Ledkast]:
     if group == "LEDKAST_1":
