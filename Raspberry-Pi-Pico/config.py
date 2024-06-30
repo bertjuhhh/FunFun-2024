@@ -1,4 +1,3 @@
-import board
 from lib.Ledkast import Ledkast
 from typing import Optional
 

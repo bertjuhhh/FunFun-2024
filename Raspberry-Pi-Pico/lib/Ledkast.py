@@ -23,9 +23,9 @@ class Ledkast:
         self.isActive = True
 
         if effect.name == "CHASE":
-            ChaseLights(self.strips, self.isRunningEffect, 50, effect.color)
+            ChaseLights(self.strips, self.isRunningEffect, self.ledCount, 50, effect.color)
         elif effect.name == "PULSATE":
-            pulsateLEDs(self.strips, self.isRunningEffect, effect.color)
+            pulsateLEDs(self.strips, self.isRunningEffect, self.ledCount, effect.color)
         else:
             self.isActive = False
             print("⚠️ Invalid effect received. Skipping...")
