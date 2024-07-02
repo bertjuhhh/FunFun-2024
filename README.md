@@ -21,10 +21,10 @@ De RPI 1b is ook verantwoordelijk voor de muziek die afgespeeld wordt. De muziek
 
 ## Protocol
 Het protocol dat gebruikt wordt om commando's te sturen van de Raspberry Pi 1b naar de Raspberry Pi Pico is een simpel protocol. Het protocol werkt als volgt:
-`{START/STOP}-{LEDKAST}-{DMX EFFECT}-{RGB COLOR}`
+`{LEDKAST}-{DMX EFFECT}-{RGB COLOR}`
 
 Een voorbeeld is:
-`START LEDKAST_1 TWINKLE rgb(255, 0, 0)`
+`LEDKAST_1 TWINKLE rgb(255, 0, 0)`
 
 ## Beschikbare effecten
 Er zijn verschillende effecten beschikbaar die de gebruiker kan kiezen. De effecten zijn:
@@ -38,6 +38,7 @@ Er zijn verschillende effecten beschikbaar die de gebruiker kan kiezen. De effec
 8. FADE
 9. TWINKLE
 10. FLASH
+11. CLEAR
 
 
 # Hardware
