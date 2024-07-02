@@ -99,6 +99,7 @@ def knop_vorige_event():
     
 def knop_play_pauze_event():
     print("Play/Pauze")
+    global isPaused
     
     isPaused = not isPaused
     
@@ -106,6 +107,8 @@ def knop_play_pauze_event():
         pygame.mixer.music.pause()
     else:
         pygame.mixer.music.unpause()
+        
+    writeLCD_line_2("PAUSED" if isPaused else "GO")
 
 buttonEvents = [{
     "pin": Knop_volgende,
