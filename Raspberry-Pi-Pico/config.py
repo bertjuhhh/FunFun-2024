@@ -1,5 +1,5 @@
 from lib.Ledkast import Ledkast
-#from typing import Optional
+from typing import Optional
 from machine import Pin 
 # Used for switching between the different LEDKASTS previewing them on the hoofdkast
 POTENTIOMETER_PIN = 26
