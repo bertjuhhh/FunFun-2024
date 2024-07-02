@@ -26,8 +26,6 @@ class Ledkast:
         # Clear the LEDs
         self.clearLEDs()
         
-        time.sleep(1)
-        
         self.isRunningEffect = True
         self.isActive = True
         
