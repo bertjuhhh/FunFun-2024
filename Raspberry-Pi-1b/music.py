@@ -60,6 +60,7 @@ print("UART initialized")
 lcd.clear()  # Clear the LCD screen
 previous_lcd_message = ("", "")
 active_song = MP3_FILE_1
+isPaused = False
 
 def knop_volgende_event():
     global active_song, startTime
@@ -98,6 +99,9 @@ def knop_vorige_event():
     
 def knop_play_pauze_event():
     print("Play/Pauze")
+    
+    isPaused = not isPaused
+    
     if pygame.mixer.music.get_busy():
         pygame.mixer.music.pause()
     else:
@@ -192,7 +196,7 @@ def main():
                     buttonEvent["callback"]()
            
         # Check every 500ms
-        if millis() - last_time >= 500:
+        if millis() - last_time >= 500 and not isPaused:
             last_time = millis()
             currentTime = millis()
             
