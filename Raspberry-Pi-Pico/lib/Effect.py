@@ -3,4 +3,4 @@ class Effect:
         self.name = name
         
         # Incoming color is formatted as rgb(255, 255, 255), so convert it to a tuple
-        self.color = tuple(map(int, color[4:-1].split(','))) if color else None
+        self.color = tuple(map(int, color[4:-1].split(','))) if color else (0, 0, 0)

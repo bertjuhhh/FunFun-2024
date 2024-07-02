@@ -36,6 +36,8 @@ class Ledkast:
         elif effect.name == "STATIC":
             print(f"Running static {effect.color}")
             staticLEDs(self.strips, effect.color)
+        elif effect.name == "CLEAR":
+            self.clearLEDs()
         else:
             self.isActive = False
             print(f"⚠️ Invalid effect received. Skipping... {effect.name}")

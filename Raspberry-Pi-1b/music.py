@@ -117,16 +117,12 @@ buttonEvents = [{
     "callback": knop_play_pauze_event
 }]
 
-def sendCommand(event: TimedEvent, startOrStop: str, currentRelativeTime):
+def sendCommand(event: TimedEvent, currentRelativeTime):
     # Format the command and send it to the Pico
     command = event.formatCommand()
-    command = f"{startOrStop}-{command}"
     
     # If stop, make console color red else green
-    if startOrStop == "STOP":
-        print(f"\033[91m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
-    else:
-        print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
+    print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
     
     ser.write((command + "\n").encode())
     
@@ -228,11 +224,5 @@ def main():
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, "START", currentRelativeTime)
                     writeLCD_line_2(f"{groupNumber} > START {event.effect.value}")
-                    
-                if event.shouldStop(currentTime, startTime):
-                    sendCommand(event, "STOP", currentRelativeTime)
-                    # replace LEDKAST_ with ""
-                    
-                    writeLCD_line_2(f"{groupNumber} > STOP {event.effect.value}")
                     
 main()

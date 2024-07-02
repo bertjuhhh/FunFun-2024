@@ -14,4 +14,5 @@ class Effect(Enum):
     FLASH = "FLASH"
     PULSATE = "PULSATE"
     CHASE = "CHASE"
+    CLEAR = "CLEAR"
     

@@ -15,10 +15,7 @@ uart = UART(1, baudrate=UART_BAUDRATE, tx=Pin(UART_TX_PIN), rx=Pin(UART_RX_PIN))
 def validateData(data: str):
     dataArray = data.split("-")
     
-    if len(dataArray) != 4:
-        return False
-    
-    if dataArray[0] not in ["START", "STOP"]:
+    if len(dataArray) != 3:
         return False
     
     return True
@@ -33,17 +30,6 @@ def startCommand(ledkast: str, effect: Effect):
     
     
     ledkast.startEffect(effect=effect)
-    
-    
-def stopCommand(ledkast: str):
-    ledkast: Ledkast = getLedkast(ledkast)
-    
-    # No LEDKAST found
-    if ledkast is None:
-        print("⚠️ Invalid LEDKAST received. Skipping...")
-        return
-    
-    ledkast.clearLEDs()
     
 def startUpSequence():
     kasten = getAllLedkasts()
@@ -118,13 +104,11 @@ def main():
                     
                     print(f"📡 Received data: {data}")
 
-                    startOrStop, dmxEffect, ledkast, rgbColor = data.split("-")
+                    dmxEffect, ledkast, rgbColor = data.split("-")
                     ledkast = "EXTERNAL_INDICATORS"
                     effect = Effect(dmxEffect, rgbColor)
-                    if startOrStop.upper() == "START":
-                        startCommand(ledkast, effect)
-                    else:
-                        stopCommand(ledkast)
+                    
+                    startCommand(ledkast, effect)
             except Exception as e:
                 print(f"⚠️ An error occurred. Skipping... {e}")
                 showError()
