@@ -120,7 +120,7 @@ buttonEvents = [{
 def sendCommand(event: TimedEvent, startOrStop: str, currentRelativeTime):
     # Format the command and send it to the Pico
     command = event.formatCommand()
-    command = f"{startOrStop}_{command}"
+    command = f"{startOrStop}-{command}"
     
     # If stop, make console color red else green
     if startOrStop == "STOP":

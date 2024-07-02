@@ -42,4 +42,4 @@ class TimedEvent:
         return self.hasStopped
     
     def formatCommand(self):
-        return f"{self.effect.value}_{self.group.value}_{self.color}"
+        return f"{self.effect.value}-{self.group.value}-{self.color}"
