@@ -13,7 +13,7 @@ def addEvent(start, end, effect: Effect, group, color = None):
     
 def addPauzeEvent(start, end, effect: Effect, group, color = None):
     event = TimedEvent(start=start, end=end, effect=effect, group=group, color=color)
-    eventLoop.append(event)
+    pauzeLoop.append(event)
     
 # Times in milliseconds    
 # 0 = infinite

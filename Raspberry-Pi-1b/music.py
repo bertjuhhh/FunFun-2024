@@ -174,8 +174,13 @@ def main():
     print("-------------------")
     print("Registered events:")
     
-    for event in eventLoop:
-        print(f"{event.start} >> {event.formatCommand()}")
+    print("Registered for Main:")
+    for event in MP3_FILE_1[1]:
+        print(event.formatCommand())
+        
+    print("Registered for Pauze:")
+    for event in MP3_FILE_2[1]:
+        print(event.formatCommand())
     
     print("-------------------")
     
