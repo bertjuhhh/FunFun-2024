@@ -73,11 +73,11 @@ def knop_volgende_event():
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_2
-    startTime = millis()
     
     resetAllEffects(MP3_FILE_2[1])
     
     writeLCD_line_2("GO > Pauze")
+    startTime = millis()
     
 def knop_mode_event():
     print("Mode knop")
@@ -94,11 +94,11 @@ def knop_vorige_event():
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_1
-    startTime = millis()  
     
     resetAllEffects(MP3_FILE_1[1])
     
     writeLCD_line_2("GO > Main")
+    startTime = millis()  
     
 def knop_play_pauze_event():
     print("Play/Pauze")
@@ -211,7 +211,7 @@ def main():
             resetAllEffects(active_song[1])
            
         # Check every 500ms
-        if millis() - last_time >= 500:
+        if millis() - last_time >= 100:
             last_time = millis()
             currentTime = millis()
             
