@@ -141,13 +141,13 @@ def writeLCD(line_1: str, line_2: str):
     previous_lcd_message = (line_1, line_2)
     
 def writeLCD_line_1(line_1: str):
-    if previous_lcd_message[1] == line_1:
+    if previous_lcd_message[0] == line_1:
         return
     
     writeLCD(line_1, previous_lcd_message[1])
     
 def writeLCD_line_2(line_2: str):
-    if previous_lcd_message[0] == line_2:
+    if previous_lcd_message[1] == line_2:
         return
     
     writeLCD(previous_lcd_message[0], line_2)

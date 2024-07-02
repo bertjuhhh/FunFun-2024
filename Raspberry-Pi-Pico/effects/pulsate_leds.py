@@ -7,8 +7,10 @@ interval = 5
 minBrightness = 20
 
 def pulsateLEDs(strip, isRunning, ledCount, color):
+    global previousMillis, brightness, fadeAmount, interval, minBrightness
+    
     while isRunning:
-        currentMillis = time.monotonic() * 1000
+        currentMillis = time.ticks_ms()
     
         if currentMillis - previousMillis >= interval:
             previousMillis = currentMillis
