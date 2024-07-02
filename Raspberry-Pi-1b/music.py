@@ -222,7 +222,7 @@ def main():
                 groupNumber = event.group.value.replace("LEDKAST_", "")
 
                 if event.shouldStart(currentTime, startTime):
-                    sendCommand(event, "START", currentRelativeTime)
+                    sendCommand(event, currentRelativeTime)
                     writeLCD_line_2(f"{groupNumber} > START {event.effect.value}")
                     
 main()
