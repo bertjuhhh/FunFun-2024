@@ -62,29 +62,31 @@ previous_lcd_message = ("", "")
 active_song = MP3_FILE_1
 
 def knop_volgende_event():
-    global active_song
+    global active_song, startTime
     print("Trigger Bewoondef")
     pygame.mixer.music.stop()
     pygame.mixer.music.load(MP3_FILE_2)
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_2
+    startTime = millis()
     
-    writeLCD_line_2("Gestart > Bewoonddef")
+    writeLCD_line_2("GO > Pauze")
     
 def knop_mode_event():
     print("Mode knop")
     
 def knop_vorige_event():
-    global active_song
+    global active_song, startTime
     print("Vorige nummer")
     pygame.mixer.music.stop()
     pygame.mixer.music.load(MP3_FILE_1)
     pygame.mixer.music.play()
     
-    active_song = MP3_FILE_1  
+    active_song = MP3_FILE_1
+    startTime = millis()  
     
-    writeLCD_line_2("Gestart > Pauzemuziek")
+    writeLCD_line_2("GO > Main")
     
 def knop_play_pauze_event():
     print("Play/Pauze")
@@ -149,9 +151,10 @@ def writeLCD_line_2(line_2: str):
 def millis():
     return time.time() * 1000
 
+startTime = millis()
+
 def main():
     global active_song
-    startTime = millis()
     
     # Log all registered events
     print("-------------------")
