@@ -160,6 +160,7 @@ startTime = millis()
 def main():
     global active_song, startTime
     
+    knop_vorige_event()
     # Log all registered events
     print("-------------------")
     print("Registered events:")
