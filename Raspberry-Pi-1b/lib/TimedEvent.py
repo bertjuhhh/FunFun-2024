@@ -7,6 +7,9 @@ class TimedEvent:
         self.hasStarted = False
         self.hasStopped = False
         
+        if self.color == None:
+            self.color = (0, 0, 0)
+        
         
     def shouldStop(self, relativeCurrentTime, relativeStartTime):
         # 0 is infinite
