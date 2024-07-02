@@ -1,27 +1,18 @@
-import time
+import asyncio
 
-previousMillis = 0
-brightness = 255
-fadeAmount = -4
-interval = 5
-minBrightness = 20
-
-def pulsateLEDs(strip, isRunning, ledCount, color):
-    global previousMillis, brightness, fadeAmount, interval, minBrightness
+async def pulsateLEDs(strips, isRunningEffect, color):
+    brightness = 0
+    direction = 1
     
-    while isRunning:
-        currentMillis = time.ticks_ms()
-    
-        if currentMillis - previousMillis >= interval:
-            previousMillis = currentMillis
-            brightness += fadeAmount
-
-            if brightness <= minBrightness or brightness >= 255:
-                fadeAmount = -fadeAmount
-
-            for i in range(ledCount):
-                strip[i] = color
-
-            strip.brightness = brightness / 255.0
-
-            strip.write()
+    while isRunningEffect:
+        for i in range(strips.n):
+            strips[i] = (color[0] * brightness // 255, color[1] * brightness // 255, color[2] * brightness // 255)
+            
+        strips.write()
+        
+        brightness += direction
+        
+        if brightness <= 0 or brightness >= 255:
+            direction *= -1
+            
+        await asyncio.sleep(0.01)

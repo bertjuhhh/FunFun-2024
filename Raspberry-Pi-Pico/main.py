@@ -1,4 +1,5 @@
 import time
+import uasyncio as asyncio
 from machine import Pin, ADC, UART
 from config import getLedkast, getAllLedkastsExceptExternal, getAllLedkasts, UART_BAUDRATE, UART_TX_PIN, UART_RX_PIN, EXTERNAL_INDICATORS, POTENTIOMETER_PIN
 
@@ -20,7 +21,7 @@ def validateData(data: str):
     
     return True
 
-def startCommand(ledkast: str, effect: Effect):
+async def startCommand(ledkast: str, effect: Effect):
     ledkast: Ledkast = getLedkast(ledkast)
     
     # No LEDKAST found
@@ -28,10 +29,9 @@ def startCommand(ledkast: str, effect: Effect):
         print("⚠️ Invalid LEDKAST received. Skipping...")
         return
     
+    await ledkast.startEffect(effect=effect)
     
-    ledkast.startEffect(effect=effect)
-    
-def startUpSequence():
+async def startUpSequence():
     kasten = getAllLedkasts()
     
     for kast in kasten:
@@ -84,11 +84,8 @@ def showError():
         indicatorStrip[i] = (255, 0, 0)
             
     indicatorStrip.write()
-    
 
-def main():
-    print("🚀 Starting Raspberry Pi Pico...")
-    startUpSequence()
+async def uart_listener():
     buffer = ""
     
     while True:
@@ -108,10 +105,21 @@ def main():
                     ledkast = "EXTERNAL_INDICATORS"
                     effect = Effect(dmxEffect, rgbColor)
                     
-                    startCommand(ledkast, effect)
+                    await startCommand(ledkast, effect)
             except Exception as e:
                 print(f"⚠️ An error occurred. Skipping... {e}")
                 showError()
+        
+        await asyncio.sleep(0.1)  # Add a small delay to prevent high CPU usage
+
+async def main():
+    print("🚀 Starting Raspberry Pi Pico...")
+    await startUpSequence()
+    
+    await uart_listener()
 
 if __name__ == "__main__":
-    main()
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("Program stopped by user")
