@@ -160,7 +160,6 @@ startTime = millis()
 def main():
     global active_song, startTime
     
-    knop_vorige_event()
     # Log all registered events
     print("-------------------")
     print("Registered events:")
@@ -189,7 +188,9 @@ def main():
                     buttonEvent["callback"]()
            
         # Restart the current song if it has ended
+        # also ensure it is loaded
         if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load(active_song[0])
             pygame.mixer.music.play()
             startTime = millis()
            
