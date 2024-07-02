@@ -1,6 +1,4 @@
 from lib.Ledkast import Ledkast
-from typing import Optional
-from machine import Pin 
 # Used for switching between the different LEDKASTS previewing them on the hoofdkast
 POTENTIOMETER_PIN = 26
 
@@ -19,7 +17,7 @@ LEDKAST_4 = Ledkast(pin=3, ledCount=10)  # weet niet of dit helemaal goed is
 # Indicators that are present on the hoofdkast
 EXTERNAL_INDICATORS = Ledkast(pin=6, ledCount=10)# Ledkast(board.GP6, 10) ool checken
 
-def getLedkast(group: str) -> Optional[Ledkast]:
+def getLedkast(group: str):
     if group == "LEDKAST_1":
         return LEDKAST_1
     elif group == "LEDKAST_2":

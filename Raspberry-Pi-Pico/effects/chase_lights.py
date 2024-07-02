@@ -30,5 +30,5 @@ def ChaseLights(strip, isRunning, ledCount, speed, color):
             if offset <= 0:
                 movingUp = True
 
-        strip.show()
+        strip.write()
         time.sleep(speed / 100.0)

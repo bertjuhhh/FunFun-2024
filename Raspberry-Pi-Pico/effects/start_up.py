@@ -7,22 +7,22 @@ def startUpEffect(strip):
         # Flash all LEDs red
         for i in range(strip.n):
             strip[i] = (255, 0, 0)
-        strip.show()
+        strip.write()
         
         time.sleep(0.7)
 
         # Flash all LEDs green
         for i in range(strip.n):
             strip[i] = (0, 255, 0)
-        strip.show()
+        strip.write()
             
         
         time.sleep(0.7)
-        
+         
         # Flash all LEDs blue
         for i in range(strip.n):
             strip[i] = (0, 0, 255)
-        strip.show()
+        strip.write()
         
-    # When done flashing, pulsate all LEDs red
-    pulsateLEDs(strip, (0, 0, 255))
+        time.sleep(0.7)
+            

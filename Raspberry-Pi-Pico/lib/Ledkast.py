@@ -1,5 +1,6 @@
 import neopixel
 from lib.Effect import Effect
+from machine import Pin 
 
 # Import all effects
 from effects.chase_lights import ChaseLights
@@ -8,7 +9,7 @@ from effects.start_up import startUpEffect
 
 class Ledkast:
     def __init__(self, pin, ledCount):
-        self.pin = pin
+        self.pin = Pin(pin)
         self.ledCount = ledCount
         self.isActive = False
         self.isRunningEffect = False
@@ -16,7 +17,7 @@ class Ledkast:
         # We are misusing this to send the data using DMX cables to a seperate device
         # This is not the actual LED strip, but is used to generate a data signal that can
         # be distributed over to four ledstrips per ledkast.
-        self.strips = neopixel.NeoPixel(pin, ledCount, auto_write=False)
+        self.strips = neopixel.NeoPixel(self.pin, ledCount)
         
     def startEffect(self, effect: Effect):
         self.isRunningEffect = False # Stop any running effects
@@ -33,7 +34,7 @@ class Ledkast:
     def clearLEDs(self):
         for i in range(self.ledCount):
             self.strips[i] = (0, 0, 0)
-        self.strips.show()
+        self.strips.write()
         self.isActive = False
         
     def showStartupEffect(self):

@@ -13,7 +13,7 @@ pot = ADC(Pin(POTENTIOMETER_PIN))
 uart = UART(1, baudrate=UART_BAUDRATE, tx=Pin(UART_TX_PIN), rx=Pin(UART_RX_PIN))
 
 def validateData(data: str):
-    dataArray = data.split("_")
+    dataArray = data.split("-")
     
     if len(dataArray) != 4:
         return False
@@ -60,6 +60,7 @@ def showStatus():
     potValue = potValue / 65535  # Normalize pot value to range 0-1
     
     selectedIndex = 0
+    print(f"Pot value: {potValue}")
     
     # Determine the selected LEDKAST based on the pot value
     if potValue < 0.25:
@@ -83,7 +84,7 @@ def showStatus():
     for i in range(2, 10):
         indicatorStrip[i] = ledkast.strips[i] if i < len(ledkast.strips) else (0, 0, 0)
         
-    indicatorStrip.show()
+    indicatorStrip.write()
 
     
 def showError():
@@ -95,7 +96,7 @@ def showError():
     for i in range(10):
         indicatorStrip[i] = (255, 0, 0)
             
-    indicatorStrip.show()
+    indicatorStrip.write()
     
 
 def main():    
@@ -106,16 +107,16 @@ def main():
         if uart.any():
             try:
                 # convert the data to a string
-                # Expected format: `{START/STOP}_{LEDKAST}_{DMX EFFECT}_{RGB COLOR}`
+                # Expected format: `{START/STOP}-{LEDKAST}-{DMX EFFECT}-{RGB COLOR}`
                 data = uart.readline().decode().strip()
                 
                 
                 # Validate the data
                 if (not validateData(data)):
-                    print("⚠️ Invalid data received. Skipping...")
+                    print(f"⚠️ Invalid data received. Skipping... {data}")
                     continue
                 
-                (startOrSop, ledkast, dmxEffect, rgbColor) = data.split("_")
+                (startOrSop, ledkast, dmxEffect, rgbColor) = data.split("-")
                 effect = Effect(dmxEffect, rgbColor)
                 
                 if startOrSop.upper() == "START":
@@ -126,7 +127,7 @@ def main():
                 showStatus()
                 
             except Exception as e:
-                print("⚠️ An error occurred. Skipping...")
+                print(f"⚠️ An error occurred. Skipping... {e}")
                 showError()
                 
         time.sleep(0.1)

@@ -128,7 +128,7 @@ def sendCommand(event: TimedEvent, startOrStop: str, currentRelativeTime):
     else:
         print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
     
-    ser.write(command.encode())
+    ser.write((command + "\n").encode())
     
     return True
 

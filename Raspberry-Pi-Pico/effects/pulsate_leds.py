@@ -22,4 +22,4 @@ def pulsateLEDs(strip, isRunning, ledCount, color):
 
             strip.brightness = brightness / 255.0
 
-            strip.show()
+            strip.write()
