@@ -198,10 +198,10 @@ def main():
 
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, "START", currentRelativeTime)
-                    writeLCD_line_2(f"{event.group}> START {event.effect}")
+                    writeLCD_line_2(f"{event.group.value} > START {event.effect}")
                     
                 if event.shouldStop(currentTime, startTime):
                     sendCommand(event, "STOP", currentRelativeTime)
-                    writeLCD_line_2(f"{event.group}> STOP {event.effect}")
+                    writeLCD_line_2(f"{event.group.value} > STOP {event.effect}")
                     
 main()
