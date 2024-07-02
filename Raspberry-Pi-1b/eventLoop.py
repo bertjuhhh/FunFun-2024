@@ -21,10 +21,9 @@ addEvent(0, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
 addPauzeEvent(0, Effect.STATIC, Groups.LEDKAST_1, green)
-
 addPauzeEvent(3900, Effect.STATIC, Groups.LEDKAST_1, gold)
 addPauzeEvent(5900, Effect.STATIC, Groups.LEDKAST_1, turquoise)
 addPauzeEvent(7900, Effect.CLEAR, Groups.LEDKAST_1)
-addEvent(12000, Effect.PULSATE, Groups.LEDKAST_2, green)
-addEvent(20000, Effect.PULSATE, Groups.LEDKAST_2, pink)
+addPauzeEvent(12000, Effect.PULSATE, Groups.LEDKAST_2, green)
+addPauzeEvent(20000, Effect.PULSATE, Groups.LEDKAST_2, pink)
 
