@@ -31,6 +31,7 @@ def startCommand(ledkast: str, effect: Effect):
         print("⚠️ Invalid LEDKAST received. Skipping...")
         return
     
+    print (f"🚀 Starting effect {effect.name} on LEDKAST {ledkast}")
     ledkast.startEffect(effect=effect)
     
 def stopCommand(ledkast: str):
@@ -60,7 +61,6 @@ def showStatus():
     potValue = potValue / 65535  # Normalize pot value to range 0-1
     
     selectedIndex = 0
-    print(f"Pot value: {potValue}")
     
     # Determine the selected LEDKAST based on the pot value
     if potValue < 0.25:
@@ -74,8 +74,8 @@ def showStatus():
     
     ledkast = ledkasten[selectedIndex]
     
-    # Represent the selected LEDKAST index in binary on the first two LEDs
-    binary = "{0:b}".format(selectedIndex).zfill(2)
+    # Represent the selected LEDKAST index in binary on the first two LEDs in micropython
+    binary = "{0:02b}".format(selectedIndex)
     
     for i in range(2):
         indicatorStrip[i] = (255, 255, 255) if binary[i] == "1" else (0, 0, 0)
@@ -99,39 +99,35 @@ def showError():
     indicatorStrip.write()
     
 
-def main():    
+def main():
     print("🚀 Starting Raspberry Pi Pico...")
     startUpSequence()
-
+    buffer = ""
+    
     while True:
         if uart.any():
             try:
-                # convert the data to a string
-                # Expected format: `{START/STOP}-{LEDKAST}-{DMX EFFECT}-{RGB COLOR}`
-                data = uart.readline().decode().strip()
-                
-                
-                # Validate the data
-                if (not validateData(data)):
-                    print(f"⚠️ Invalid data received. Skipping... {data}")
-                    continue
-                
-                (startOrSop, ledkast, dmxEffect, rgbColor) = data.split("-")
-                effect = Effect(dmxEffect, rgbColor)
-                
-                if startOrSop.upper() == "START":
-                    startCommand(ledkast, effect)
-                else:
-                    stopCommand(ledkast)
+                buffer += uart.read().decode()
+                if "\n" in buffer:
+                    data, buffer = buffer.split("\n", 1)  # Get the first complete command and keep the rest
+                    data = data.strip()
+                    if not validateData(data):
+                        print(f"⚠️ Invalid data received. Skipping... {data}")
+                        continue
                     
-                showStatus()
-                
+                    print(f"📡 Received data: {data}")
+
+                    startOrStop, dmxEffect, ledkast, rgbColor = data.split("-")
+                    ledkast = "EXTERNAL_INDICATORS"
+                    effect = Effect(dmxEffect, rgbColor)
+                    if startOrStop.upper() == "START":
+                        startCommand(ledkast, effect)
+                    else:
+                        stopCommand(ledkast)
+                    showStatus()
             except Exception as e:
                 print(f"⚠️ An error occurred. Skipping... {e}")
                 showError()
-                
-        time.sleep(0.1)
-
 
 if __name__ == "__main__":
     main()

@@ -6,6 +6,7 @@ from machine import Pin
 from effects.chase_lights import ChaseLights
 from effects.pulsate_leds import pulsateLEDs
 from effects.start_up import startUpEffect
+from effects.static import staticLEDs
 
 class Ledkast:
     def __init__(self, pin, ledCount):
@@ -27,9 +28,11 @@ class Ledkast:
             ChaseLights(self.strips, self.isRunningEffect, self.ledCount, 50, effect.color)
         elif effect.name == "PULSATE":
             pulsateLEDs(self.strips, self.isRunningEffect, self.ledCount, effect.color)
+        elif effect.name == "STATIC":
+            staticLEDs(self.strips, self.ledCount, effect.color)
         else:
             self.isActive = False
-            print("⚠️ Invalid effect received. Skipping...")
+            print(f"⚠️ Invalid effect received. Skipping... {effect.name}")
             
     def clearLEDs(self):
         for i in range(self.ledCount):

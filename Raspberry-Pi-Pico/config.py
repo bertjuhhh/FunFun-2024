@@ -26,6 +26,8 @@ def getLedkast(group: str):
         return LEDKAST_3
     elif group == "LEDKAST_4":
         return LEDKAST_4
+    elif group == "EXTERNAL_INDICATORS":
+        return EXTERNAL_INDICATORS
     else:
         return None
     
