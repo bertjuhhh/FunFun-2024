@@ -70,7 +70,7 @@ def knop_volgende_event():
     
     active_song = MP3_FILE_2
     
-    writeLCD_line_2("Gestart> Bewoonddef")
+    writeLCD_line_2("Gestart > Bewoonddef")
     
 def knop_mode_event():
     print("Mode knop")
@@ -84,7 +84,7 @@ def knop_vorige_event():
     
     active_song = MP3_FILE_1  
     
-    writeLCD_line_2("Gestart> Pauzemuziek")
+    writeLCD_line_2("Gestart > Pauzemuziek")
     
 def knop_play_pauze_event():
     print("Play/Pauze")
@@ -132,7 +132,7 @@ def writeLCD(line_1: str, line_2: str):
     lcd.clear()
     lcd.message = message
     
-    previous_lcd_message = message
+    previous_lcd_message = (line_1, line_2)
     
 def writeLCD_line_1(line_1: str):
     if previous_lcd_message[1] == line_1:
@@ -168,13 +168,17 @@ def main():
     print("Starting main loop...")
     
     last_time = 500000 # Make sure the first loop runs
+    last_button_press = 5000 # Make sure the first button press is not too fast
     
     # Main loop
     while True:
         # Check for button presses
         for buttonEvent in buttonEvents:
             if not GPIO.input(buttonEvent["pin"]):
-                buttonEvent["callback"]()
+                # Make sure the button press is not too fast
+                if millis() - last_button_press > 500:
+                    last_button_press = millis()
+                    buttonEvent["callback"]()
            
         # Check every 500ms
         if millis() - last_time >= 500:

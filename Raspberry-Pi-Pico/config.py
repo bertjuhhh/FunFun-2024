@@ -12,11 +12,6 @@ UART_TX_PIN = 4
 UART_RX_PIN = 5
 UART_BAUDRATE = 9600
 
-# Create Ledkast objects
-#LEDKAST_1 = 0,10#Ledkast(board.GP0, 10) #is fout (geen board.gp gebruiken)
-#LEDKAST_2 = 1,10#Ledkast(board.GP1, 10) #is fout (geen board.gp gebruiken)
-#LEDKAST_3 = 2,10#Ledkast(board.GP2, 10) #is fout (geen board.gp gebruiken)
-#LEDKAST_4 = 3,10#Ledkast(board.GP3, 10) #is fout (geen board.gp gebruiken)
 LEDKAST_1 = Ledkast(pin=0, ledCount=10)  # weet niet of dit helemaal goed is
 LEDKAST_2 = Ledkast(pin=1, ledCount=10)  # weet niet of dit helemaal goed is
 LEDKAST_3 = Ledkast(pin=2, ledCount=10)  # weet niet of dit helemaal goed is

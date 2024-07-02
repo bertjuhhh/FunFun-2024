@@ -38,3 +38,13 @@ Er zijn verschillende effecten beschikbaar die de gebruiker kan kiezen. De effec
 8. FADE
 9. TWINKLE
 10. FLASH
+
+
+# Hardware
+## Verbinden
+Om te verbinden met de Hoofdkast log je in op het FunFun Verlichting netwerk. Het wachtwoord is `12345678`, vervolgens kun je via ssh verbinden met de Raspberry Pi 1b.
+
+## VNC
+VNC viewer is uitgeschakeld op de Raspberry Pi 1b vanwege performance redenen. Als je toch VNC wilt gebruiken kun je dit inschakelen door het volgende commando uit te voeren:
+`sudo raspi-config`
+
