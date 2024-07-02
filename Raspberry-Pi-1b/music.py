@@ -158,7 +158,7 @@ def millis():
 startTime = millis()
 
 def main():
-    global active_song
+    global active_song, startTime
     
     # Log all registered events
     print("-------------------")
