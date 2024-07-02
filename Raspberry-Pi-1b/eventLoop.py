@@ -18,17 +18,7 @@ def addPauzeEvent(start, end, effect: Effect, group, color = None):
 # Times in milliseconds    
 # 0 = infinite
 addEvent(0, 0, Effect.PULSATE, Groups.LEDKAST_2, blue)
-addEvent(0, 0, Effect.PULSATE, Groups.LEDKAST_3, blue)
-
-addEvent(5000, 10000, Effect.CHASE, Groups.LEDKAST_2, gold)
-addEvent(5000, 10000, Effect.CHASE, Groups.LEDKAST_3, gold)
-
-addEvent(12000, 20000, Effect.PULSATE, Groups.LEDKAST_2, blue)
-addEvent(12000, 20000, Effect.PULSATE, Groups.LEDKAST_3, blue)
 
 # PAUZE
 addPauzeEvent(0, 0, Effect.STATIC, Groups.LEDKAST_1, green)
-addPauzeEvent(0, 0, Effect.STATIC, Groups.LEDKAST_2, green)
-addPauzeEvent(0, 0, Effect.STATIC, Groups.LEDKAST_3, green)
-addPauzeEvent(0, 0, Effect.STATIC, Groups.LEDKAST_4, green)
 
