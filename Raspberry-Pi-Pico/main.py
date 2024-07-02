@@ -31,8 +31,9 @@ def startCommand(ledkast: str, effect: Effect):
         print("⚠️ Invalid LEDKAST received. Skipping...")
         return
     
-    print (f"🚀 Starting effect {effect.name} on LEDKAST {ledkast}")
+    
     ledkast.startEffect(effect=effect)
+    
     
 def stopCommand(ledkast: str):
     ledkast: Ledkast = getLedkast(ledkast)
@@ -124,7 +125,6 @@ def main():
                         startCommand(ledkast, effect)
                     else:
                         stopCommand(ledkast)
-                    showStatus()
             except Exception as e:
                 print(f"⚠️ An error occurred. Skipping... {e}")
                 showError()
