@@ -64,6 +64,10 @@ active_song = MP3_FILE_1
 def knop_volgende_event():
     global active_song, startTime
     print("Trigger Bewoondef")
+    
+    if active_song == MP3_FILE_2:
+        return
+    
     pygame.mixer.music.stop()
     pygame.mixer.music.load(MP3_FILE_2)
     pygame.mixer.music.play()
@@ -79,6 +83,10 @@ def knop_mode_event():
 def knop_vorige_event():
     global active_song, startTime
     print("Vorige nummer")
+    
+    if active_song == MP3_FILE_1:
+        return
+    
     pygame.mixer.music.stop()
     pygame.mixer.music.load(MP3_FILE_1)
     pygame.mixer.music.play()
