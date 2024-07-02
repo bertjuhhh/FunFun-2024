@@ -48,3 +48,9 @@ Om te verbinden met de Hoofdkast log je in op het FunFun Verlichting netwerk. He
 VNC viewer is uitgeschakeld op de Raspberry Pi 1b vanwege performance redenen. Als je toch VNC wilt gebruiken kun je dit inschakelen door het volgende commando uit te voeren:
 `sudo raspi-config`
 
+## Knoppen
+Er zijn vier knoppen aanwezig op de Raspberry Pi 1b. Deze knoppen hebben de volgende functionaliteiten:
+1. Previous/Vorige knop: Starten van main script
+2. Play/Pauze knop: Niks
+3. Next/Volgende knop: Starten van pauze script
+4. Mode knop: Niks

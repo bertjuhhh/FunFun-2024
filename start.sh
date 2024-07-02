@@ -1,4 +1,4 @@
 #!/bin/bash
-
 git pull
-python3 Raspberry-Pi-1b/music.py
+
+python3 ~/FunFun-2024/Raspberry-Pi-1b/music.py
