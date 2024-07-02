@@ -5,13 +5,13 @@ import adafruit_character_lcd.character_lcd as characterlcd
 import board
 import digitalio
 import serial
-from eventLoop import eventLoop
+from eventLoop import eventLoop, pauzeLoop
 import sys
 from lib.TimedEvent import TimedEvent
 
 # Configuration
-MP3_FILE_1 = "Main.mp3"
-MP3_FILE_2 = "Pauze.mp3"
+MP3_FILE_1 = ("Main.mp3", eventLoop)
+MP3_FILE_2 = ("Pauze.mp3", pauzeLoop)
 
 Knop_volgende = 7
 Knop_mode = 8
@@ -69,7 +69,7 @@ def knop_volgende_event():
         return
     
     pygame.mixer.music.stop()
-    pygame.mixer.music.load(MP3_FILE_2)
+    pygame.mixer.music.load(MP3_FILE_2[0])
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_2
@@ -88,7 +88,7 @@ def knop_vorige_event():
         return
     
     pygame.mixer.music.stop()
-    pygame.mixer.music.load(MP3_FILE_1)
+    pygame.mixer.music.load(MP3_FILE_1[0])
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_1
@@ -187,6 +187,11 @@ def main():
                     last_button_press = millis()
                     buttonEvent["callback"]()
            
+        # Restart the current song if it has ended
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.play()
+            startTime = millis()
+           
         # Check every 500ms
         if millis() - last_time >= 500:
             last_time = millis()
@@ -196,7 +201,7 @@ def main():
             
             writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song}")
                 
-            for event in eventLoop:
+            for event in active_song[1]:
                 if event.hasStopped:
                     continue
 
