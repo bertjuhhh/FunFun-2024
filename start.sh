@@ -1,4 +1,5 @@
 #!/bin/bash
+
 git pull
 
 # Set the directory you want to upload
