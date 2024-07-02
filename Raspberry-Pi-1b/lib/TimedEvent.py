@@ -1,5 +1,5 @@
 class TimedEvent:
-    def __init__(self, start, end, effect, group, color = None):
+    def __init__(self, start, effect, group, color = None):
         self.start = start
         self.effect = effect
         self.group = group
