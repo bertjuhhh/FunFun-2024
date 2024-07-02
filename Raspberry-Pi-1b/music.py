@@ -206,13 +206,17 @@ def main():
             for event in active_song[1]:
                 if event.hasStopped:
                     continue
+                
+                groupNumber = event.group.value.replace("LEDKAST_", "")
 
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, "START", currentRelativeTime)
-                    writeLCD_line_2(f"{event.group.value} > START {event.effect}")
+                    writeLCD_line_2(f"{groupNumber} > START {event.effect.value}")
                     
                 if event.shouldStop(currentTime, startTime):
                     sendCommand(event, "STOP", currentRelativeTime)
-                    writeLCD_line_2(f"{event.group.value} > STOP {event.effect}")
+                    # replace LEDKAST_ with ""
+                    
+                    writeLCD_line_2(f"{groupNumber} > STOP {event.effect.value}")
                     
 main()
