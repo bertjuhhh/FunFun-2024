@@ -104,10 +104,10 @@ buttonEvents = [{
     "callback": knop_volgende_event
 }, {
     "pin": Knop_mode,
-    "callback": knop_mode_event
+    "callback": knop_vorige_event
 }, {
     "pin": Knop_vorige,
-    "callback": knop_vorige_event
+    "callback": knop_mode_event
 }, {
     "pin": Knop_play_pauze,
     "callback": knop_play_pauze_event
