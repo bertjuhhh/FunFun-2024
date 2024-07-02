@@ -190,7 +190,7 @@ def main():
             
             currentRelativeTime = int(currentTime - startTime)
             
-            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {MP3_FILE_1}")
+            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song}")
                 
             for event in eventLoop:
                 if event.hasStopped:
