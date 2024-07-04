@@ -1,7 +1,7 @@
 from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Groups import Groups
-from lib.Colors import blue, gold, green, turquoise, pink, red, clear
+from lib.Colors import blue, gold, green, turquoise, pink, red, clear, magenta
 from lib.Groups import Groups
 
 # typed array
@@ -30,7 +30,7 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 clearAll(eventLoop)
-addEvent(5, Effect.PULSATE, Groups.LEDKAST_2, blue)
+addEvent(5000, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
 addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_1, red)
@@ -39,5 +39,5 @@ addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_3, turquoise)
 addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_4, gold)
 
 addPauzeEvent(13000, Effect.CLEAR, Groups.LEDKAST_2)
-addPauzeEvent(15000, Effect.PULSATE, Groups.LEDKAST_2, pink)
+addPauzeEvent(18000, Effect.PULSATE, Groups.LEDKAST_2, magenta)
 
