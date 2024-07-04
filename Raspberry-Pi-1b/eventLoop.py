@@ -18,9 +18,9 @@ def addPauzeEvent(start, effect: Effect, group, color = None):
     
 def clearAll(loop):
     group1 = TimedEvent(start=0, effect=Effect.CLEAR, group=Groups.LEDKAST_1)
-    group2 = TimedEvent(start=0, effect=Effect.CLEAR, group=Groups.LEDKAST_2)
-    group3 = TimedEvent(start=0, effect=Effect.CLEAR, group=Groups.LEDKAST_3)
-    group4 = TimedEvent(start=0, effect=Effect.CLEAR, group=Groups.LEDKAST_4)
+    group2 = TimedEvent(start=1000, effect=Effect.CLEAR, group=Groups.LEDKAST_2)
+    group3 = TimedEvent(start=2000, effect=Effect.CLEAR, group=Groups.LEDKAST_3)
+    group4 = TimedEvent(start=3000, effect=Effect.CLEAR, group=Groups.LEDKAST_4)
     
     loop.append(group1)
     loop.append(group2)
@@ -30,7 +30,7 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 clearAll(eventLoop)
-addEvent(2000, Effect.PULSATE, Groups.LEDKAST_2, blue)
+addEvent(5, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_2, green)
