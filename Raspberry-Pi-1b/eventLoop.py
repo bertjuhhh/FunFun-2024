@@ -18,9 +18,9 @@ def addPauzeEvent(start, effect: Effect, group, color = None):
     
 def clearAll(loop):
     group1 = TimedEvent(start=0, effect=Effect.STATIC, group=Groups.LEDKAST_1, color=clear)
-    group2 = TimedEvent(start=1000, effect=Effect.STATIC, group=Groups.LEDKAST_2, color=clear)
-    group3 = TimedEvent(start=2000, effect=Effect.STATIC, group=Groups.LEDKAST_3, color=clear)
-    group4 = TimedEvent(start=3000, effect=Effect.STATIC, group=Groups.LEDKAST_4, color=clear)
+    group2 = TimedEvent(start=0, effect=Effect.STATIC, group=Groups.LEDKAST_2, color=clear)
+    group3 = TimedEvent(start=0, effect=Effect.STATIC, group=Groups.LEDKAST_3, color=clear)
+    group4 = TimedEvent(start=0, effect=Effect.STATIC, group=Groups.LEDKAST_4, color=clear)
     
     loop.append(group1)
     loop.append(group2)

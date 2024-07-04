@@ -84,17 +84,18 @@ async def uart_listener():
     while True:
         if uart.any():
             try:
-                buffer += uart.read().decode()
-                if "\n" in buffer:
-                    data, buffer = buffer.split("\n", 1)  # Get the first complete command and keep the rest
-                    data = data.strip()
-                    if not validateData(data):
-                        print(f"⚠️ Invalid data received. Skipping... {data}")
+                data = uart.read().decode()
+                buffer += data
+                while "\n" in buffer:
+                    line, buffer = buffer.split("\n", 1)
+                    line = line.strip()
+                    if not validateData(line):
+                        print(f"⚠️ Invalid data received. Skipping... {line}")
                         continue
                     
-                    print(f"📡 Received data: {data}")
+                    print(f"📡 Received data: {line}")
 
-                    dmxEffect, ledkast, rgbColor = data.split("-")
+                    dmxEffect, ledkast, rgbColor = line.split("-")
                     effect = Effect(dmxEffect, rgbColor)
                     
                     await startCommand(ledkast, effect)
