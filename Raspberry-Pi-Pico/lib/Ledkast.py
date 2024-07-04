@@ -1,7 +1,8 @@
 import neopixel
 from lib.Effect import Effect
 from machine import Pin 
-import uasyncio as asyncio
+import asyncio
+import time
 
 # Import all effects
 from effects.chase_lights import ChaseLights
@@ -35,13 +36,16 @@ class Ledkast:
         self.clearLEDs()
         self.isRunningEffect = False
         
+        await asyncio.sleep(0.1)
+        
         self.isRunningEffect = True
         self.isActive = True
-        
+                
+        print(f"🚀 Starting effect {effect.name} on {self.name}")
         if effect.name == "CHASE":
-            self.current_task = asyncio.create_task(ChaseLights(self.strips, self.isRunningEffect, self.ledCount, 50, effect.color))
+            self.current_task = asyncio.create_task(ChaseLights(self, effect.color))
         elif effect.name == "PULSATE":
-            self.current_task = asyncio.create_task(pulsateLEDs(self.strips, self.isRunningEffect, effect.color))
+            self.current_task = asyncio.create_task(pulsateLEDs(self, effect.color))
         elif effect.name == "STATIC":
             print(f"Running static {effect.color}")
             staticLEDs(self.strips, effect.color)
@@ -60,5 +64,6 @@ class Ledkast:
         self.strips.write()
         self.isActive = False
     
-    def showStartupEffect(self):
-        startUpEffect(self.strips)
+    async def showStartupEffect(self):
+        print(f"🚀 Starting startup effect on {self.name}")
+        await startUpEffect(self.strips)

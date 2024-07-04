@@ -1,7 +1,7 @@
 from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Groups import Groups
-from lib.Colors import blue, gold, green, turquoise, pink
+from lib.Colors import blue, gold, green, turquoise, pink, red, clear
 
 # typed array
 eventLoop: list[TimedEvent] = []
@@ -21,6 +21,10 @@ addEvent(0, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_2, green)
-addPauzeEvent(8000, Effect.CLEAR, Groups.LEDKAST_1)
+addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_1, red)
+addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_3, turquoise)
+addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_4, gold)
+
+addPauzeEvent(8000, Effect.CLEAR, Groups.LEDKAST_2)
 addPauzeEvent(10000, Effect.PULSATE, Groups.LEDKAST_2, pink)
 

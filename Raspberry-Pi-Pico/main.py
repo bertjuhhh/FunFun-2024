@@ -1,11 +1,9 @@
 import time
-import uasyncio as asyncio
 from machine import Pin, ADC, UART
 from config import getLedkast, getAllLedkastsExceptExternal, getAllLedkasts, UART_BAUDRATE, UART_TX_PIN, UART_RX_PIN, EXTERNAL_INDICATORS, POTENTIOMETER_PIN
-
 from lib.Ledkast import Ledkast
 from lib.Effect import Effect
-
+import asyncio
 
 # Initialize POT meter
 pot = ADC(Pin(POTENTIOMETER_PIN))
@@ -15,14 +13,12 @@ uart = UART(1, baudrate=UART_BAUDRATE, tx=Pin(UART_TX_PIN), rx=Pin(UART_RX_PIN))
 
 def validateData(data: str):
     dataArray = data.split("-")
-    
     if len(dataArray) != 3:
         return False
-    
     return True
 
-async def startCommand(ledkast: str, effect: Effect):
-    ledkast: Ledkast = getLedkast(ledkast)
+async def startCommand(ledkast_name: str, effect: Effect):
+    ledkast: Ledkast = getLedkast(ledkast_name)
     
     # No LEDKAST found
     if ledkast is None:
@@ -33,10 +29,9 @@ async def startCommand(ledkast: str, effect: Effect):
     
 async def startUpSequence():
     kasten = getAllLedkasts()
-    
     for kast in kasten:
-        kast.showStartupEffect()
-    
+        await kast.showStartupEffect()
+
 # This displays the status on the external indicators in the following:
 # When rotating the POT meter, it switches between the different LEDKASTS, previewing them on the hoofdkast
 # We have four groups so the pot meter is divided into four sections
@@ -61,14 +56,13 @@ def showStatus():
     
     ledkast = ledkasten[selectedIndex]
     
-    # Represent the selected LEDKAST index in binary on the first two LEDs in micropython
-    binary = "{0:02b}".format(selectedIndex)
+    for i in range(10):
+        indicatorStrip[i] = (0, 0, 0)
     
-    for i in range(2):
-        indicatorStrip[i] = (255, 255, 255) if binary[i] == "1" else (0, 0, 0)
+    indicatorStrip[selectedIndex] = (255, 255, 255) 
     
     # Preview the first 10 LEDs of the selected LEDKAST on the indicator strip
-    for i in range(2, 10):
+    for i in range(4, 10):
         indicatorStrip[i] = ledkast.strips[i] if i < len(ledkast.strips) else (0, 0, 0)
         
     indicatorStrip.write()
@@ -87,7 +81,6 @@ def showError():
 
 async def uart_listener():
     buffer = ""
-    
     while True:
         if uart.any():
             try:
@@ -102,24 +95,32 @@ async def uart_listener():
                     print(f"📡 Received data: {data}")
 
                     dmxEffect, ledkast, rgbColor = data.split("-")
-                    ledkast = "EXTERNAL_INDICATORS"
                     effect = Effect(dmxEffect, rgbColor)
                     
                     await startCommand(ledkast, effect)
             except Exception as e:
                 print(f"⚠️ An error occurred. Skipping... {e}")
                 showError()
-        
-        await asyncio.sleep(0.1)  # Add a small delay to prevent high CPU usage
+        await asyncio.sleep(0.1)  # Small delay to prevent busy waiting
 
 async def main():
+    indicatorStrip = EXTERNAL_INDICATORS.strips
+    
+    for i in range(10):
+        indicatorStrip[i] = (0, 0, 0)
+        
+    indicatorStrip.write()
     print("🚀 Starting Raspberry Pi Pico...")
     await startUpSequence()
+    print("🚀 Raspberry Pi Pico started successfully.")
     
-    await uart_listener()
+    # Start the UART listener task
+    uart_task = asyncio.create_task(uart_listener())
+
+    # Keep the main function running indefinitely
+    while True:
+        showStatus()
+        await asyncio.sleep(0.07)  # Update status at regular intervals
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("Program stopped by user")
+    asyncio.run(main())
