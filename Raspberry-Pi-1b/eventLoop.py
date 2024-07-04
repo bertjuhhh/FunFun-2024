@@ -27,6 +27,7 @@ def clearAll(loop):
     loop.append(group3)
     loop.append(group4)
     
+# Currently, only STATIC and PULSATE are supported
 # Times in milliseconds    
 # 0 = infinite
 clearAll(eventLoop)
@@ -41,5 +42,6 @@ addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_3, turquoise)
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_4, gold)
 
 addPauzeEvent(4000, Effect.STATIC, Groups.LEDKAST_2, clear)
+addPauzeEvent(4000, Effect.CHASE, Groups.LEDKAST_1, pink)
 addPauzeEvent(6000, Effect.PULSATE, Groups.LEDKAST_2, magenta)
 
