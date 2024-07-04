@@ -32,7 +32,7 @@ def clearAll(loop):
 clearAll(eventLoop)
 addEvent(1000, Effect.STATIC, Groups.LEDKAST_2, red)
 addEvent(2000, Effect.STATIC, Groups.LEDKAST_2, orange)
-addEvent(2000, Effect.PULSATE, Groups.LEDKAST_2, blue)
+addEvent(3000, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
 addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_1, red)
