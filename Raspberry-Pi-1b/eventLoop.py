@@ -30,15 +30,14 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 clearAll(eventLoop)
-addEvent(0, Effect.PULSATE, Groups.LEDKAST_2, blue)
+addEvent(2000, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
-clearAll(pauzeLoop)
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_2, green)
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_1, red)
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_3, turquoise)
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_4, gold)
 
 addPauzeEvent(8000, Effect.CLEAR, Groups.LEDKAST_2)
-addPauzeEvent(10000, Effect.PULSATE, Groups.LEDKAST_2, pink)
+addPauzeEvent(12000, Effect.PULSATE, Groups.LEDKAST_2, pink)
 
