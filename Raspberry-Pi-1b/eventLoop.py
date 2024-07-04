@@ -33,8 +33,8 @@ clearAll(eventLoop)
 addEvent(5, Effect.PULSATE, Groups.LEDKAST_2, blue)
 
 # PAUZE
-addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_2, green)
 addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_1, red)
+addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_2, green)
 addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_3, turquoise)
 addPauzeEvent(5000, Effect.PULSATE, Groups.LEDKAST_4, gold)
 
