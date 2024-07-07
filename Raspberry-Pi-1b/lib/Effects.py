@@ -15,4 +15,5 @@ class Effect(Enum):
     PULSATE = "PULSATE"
     CHASE = "CHASE"
     CLEAR = "CLEAR"
+    BPMFLASH = "BPMFLASH"
     

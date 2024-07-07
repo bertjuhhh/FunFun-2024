@@ -45,5 +45,6 @@ addPauzeEvent(17200, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(18200, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(18700, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(19500, Effect.FLASH, Groups.LEDKAST_1, blue)
+addPauzeEvent(25230, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
 
 

@@ -10,8 +10,9 @@ import sys
 from lib.TimedEvent import TimedEvent
 
 # Configuration
-MP3_FILE_1 = ("Main.mp3", eventLoop)
-MP3_FILE_2 = ("music/europapa.ogg", pauzeLoop)
+# Filename, loop, bpm
+MP3_FILE_1 = ("Main.mp3", eventLoop, 160)
+MP3_FILE_2 = ("music/europapa.ogg", pauzeLoop, 160)
 
 Knop_volgende = 7
 Knop_mode = 8
@@ -119,7 +120,7 @@ buttonEvents = [{
 
 def sendCommand(event: TimedEvent, currentRelativeTime):
     # Format the command and send it to the Pico
-    command = event.formatCommand()
+    command = f"{event.formatCommand()}-{active_song[2]}"
     
     # If stop, make console color red else green
     print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")

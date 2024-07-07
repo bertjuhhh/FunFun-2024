@@ -13,7 +13,7 @@ uart = UART(1, baudrate=UART_BAUDRATE, tx=Pin(UART_TX_PIN), rx=Pin(UART_RX_PIN))
 
 def validateData(data: str):
     dataArray = data.split("-")
-    if len(dataArray) != 3:
+    if len(dataArray) != 4:
         return False
     return True
 
@@ -95,8 +95,8 @@ async def uart_listener():
                     
                     print(f"📡 Received data: {line}")
 
-                    dmxEffect, ledkast, rgbColor = line.split("-")
-                    effect = Effect(dmxEffect, rgbColor)
+                    dmxEffect, ledkast, rgbColor, bpm = line.split("-")
+                    effect = Effect(dmxEffect, bpm, rgbColor)
                     
                     await startCommand(ledkast, effect)
             except Exception as e:
