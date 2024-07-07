@@ -11,7 +11,7 @@ from lib.TimedEvent import TimedEvent
 
 # Configuration
 MP3_FILE_1 = ("Main.mp3", eventLoop)
-MP3_FILE_2 = ("music/europapa.mp3", pauzeLoop)
+MP3_FILE_2 = ("music/europapa.ogg", pauzeLoop)
 
 Knop_volgende = 7
 Knop_mode = 8
