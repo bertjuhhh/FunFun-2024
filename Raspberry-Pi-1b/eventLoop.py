@@ -49,14 +49,61 @@ addPauzeEvent(25230, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(43290, Effect.FLASH, Groups.LEDKAST_1, yellow)
 addPauzeEvent(44750, Effect.FLASH, Groups.LEDKAST_1, yellow)
 addPauzeEvent(46000, Effect.FLASH, Groups.LEDKAST_1, yellow)
-addPauzeEvent(49140, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
 
-addPauzeEvent(52800, Effect.FLASH, Groups.LEDKAST_1, yellow)
-addPauzeEvent(53180, Effect.FLASH, Groups.LEDKAST_1, yellow)
+# verse marker
+chorus1_start = 49140
+addPauzeEvent(chorus1_start, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
 
-addPauzeEvent(54380, Effect.FLASH, Groups.LEDKAST_1, yellow)
-addPauzeEvent(54680, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 3560, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 4000, Effect.FLASH, Groups.LEDKAST_1, yellow)
 
-addPauzeEvent(55040, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+addPauzeEvent(chorus1_start + 5240, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 5680, Effect.FLASH, Groups.LEDKAST_1, yellow)
 
 
+addPauzeEvent(chorus1_start + 5900, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+
+addPauzeEvent(chorus1_start + 9640, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 10040, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(chorus1_start + 11160, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 11510, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(chorus1_start + 12500, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+# EU, RO, PA
+addPauzeEvent(chorus1_start + 21130, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 21830, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus1_start + 22590, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+verse2_marker = 73120
+
+addPauzeEvent(verse2_marker + 0, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+
+chorus2_marker = 97190
+addPauzeEvent(chorus2_marker, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+addPauzeEvent(chorus2_marker + 3560, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus2_marker + 4000, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(chorus2_marker + 5240, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus2_marker + 5680, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+
+addPauzeEvent(chorus2_marker + 5900, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+
+addPauzeEvent(chorus2_marker + 9640, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus2_marker + 10040, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(chorus2_marker + 11160, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus2_marker + 11510, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(chorus2_marker + 12500, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+# EU, RO, PA
+addPauzeEvent(chorus2_marker + 21130, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus2_marker + 21830, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(chorus2_marker + 22590, Effect.FLASH, Groups.LEDKAST_1, yellow)
