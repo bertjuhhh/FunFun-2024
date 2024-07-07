@@ -49,7 +49,7 @@ GPIO.setup(Knop_play_pauze, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 print("GPIO pins configured")
 
 # Initialize pygame mixer
-pygame.mixer.init()
+pygame.mixer.init(frequency=48000)
 
 print("Pygame mixer initialized")
 
