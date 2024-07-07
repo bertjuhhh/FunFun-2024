@@ -9,6 +9,7 @@ from effects.chase_lights import ChaseLights
 from effects.start_up import startUpEffect
 from effects.static import staticLEDs
 from effects.pulsate_leds import pulsateLEDs
+from effects.flash import flashLEDs
 
 class Ledkast:
     def __init__(self, pin, ledCount, name):
@@ -46,6 +47,8 @@ class Ledkast:
             self.current_task = asyncio.create_task(ChaseLights(self, effect.color))
         elif effect.name == "PULSATE":
             self.current_task = asyncio.create_task(pulsateLEDs(self, effect.color))
+        elif effect.name == "FLASH":
+            self.current_task = asyncio.create_task(flashLEDs(self, effect.color))
         elif effect.name == "STATIC":
             print(f"Running static {effect.color}")
             staticLEDs(self.strips, effect.color)
