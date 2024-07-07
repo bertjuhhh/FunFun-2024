@@ -1,7 +1,7 @@
 from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Groups import Groups
-from lib.Colors import blue, gold, green, turquoise, pink, red, clear, magenta, orange
+from lib.Colors import blue, gold, green, turquoise, pink, red, clear, magenta, orange, yellow
 from lib.Groups import Groups
 
 # typed array
@@ -39,12 +39,24 @@ addEvent(3000, Effect.PULSATE, Groups.LEDKAST_2, blue)
 clearAll(pauzeLoop)
 addPauzeEvent(0, Effect.PULSATE, Groups.LEDKAST_1, blue)
 addPauzeEvent(13200, Effect.FLASH, Groups.LEDKAST_1, blue)
-addPauzeEvent(14200, Effect.PULSATE, Groups.LEDKAST_1, blue)
+addPauzeEvent(14200, Effect.PULSATE, Groups.LEDKAST_1, yellow)
 addPauzeEvent(16800, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(17200, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(18200, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(18700, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(19500, Effect.FLASH, Groups.LEDKAST_1, blue)
 addPauzeEvent(25230, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+addPauzeEvent(43290, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(44750, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(46000, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(49140, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
+
+addPauzeEvent(52800, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(53180, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(54380, Effect.FLASH, Groups.LEDKAST_1, yellow)
+addPauzeEvent(54680, Effect.FLASH, Groups.LEDKAST_1, yellow)
+
+addPauzeEvent(55040, Effect.BPMFLASH, Groups.LEDKAST_1, blue)
 
 
