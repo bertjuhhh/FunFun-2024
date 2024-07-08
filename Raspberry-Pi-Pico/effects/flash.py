@@ -10,6 +10,8 @@ async def flashLEDs(ledkast, color):
         
     ledkast.strips.write()
     
+    await asyncio.sleep(0.2)
+    
     # fade out
     while brightness >= 0:
         for i in range(ledkast.strips.n):

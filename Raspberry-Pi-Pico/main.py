@@ -59,11 +59,6 @@ def showStatus():
     for i in range(10):
         indicatorStrip[i] = (0, 0, 0)
     
-    indicatorStrip[0] = ledkasten[0].strips[0]
-    indicatorStrip[1] = ledkasten[1].strips[0]
-    indicatorStrip[2] = ledkasten[2].strips[0]
-    indicatorStrip[3] = ledkasten[3].strips[0]
-    
     indicatorStrip[selectedIndex] = (255, 255, 255) 
     
     # Preview the first 10 LEDs of the selected LEDKAST on the indicator strip

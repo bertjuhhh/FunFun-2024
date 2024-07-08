@@ -12,8 +12,8 @@ from lib.TimedEvent import TimedEvent
 # Configuration
 # Filename, loop, bpm
 # All files should be at a sample rate of 48000 kHz
-MP3_FILE_1 = ("music/levendbewijsopzet1.ogg", eventLoop, 160)
-MP3_FILE_2 = ("music/europapa.ogg", pauzeLoop, 160)
+MP3_FILE_1 = ("~/FunFun-2024/Raspberry-Pi-1b/music/levendbewijsopzet1.ogg", eventLoop, 160)
+MP3_FILE_2 = ("~/FunFun-2024/Raspberry-Pi-1b/music/europapa.ogg", pauzeLoop, 160)
 
 Knop_volgende = 7
 Knop_mode = 8
@@ -215,7 +215,7 @@ def main():
             
             currentRelativeTime = int(currentTime - startTime)
             
-            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song[0].replace('music/', '')}")
+            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song[0].replace('~/FunFun-2024/Raspberry-Pi-1b/music/', '')}")
                 
             for event in active_song[1]:
                 if event.hasStopped:
