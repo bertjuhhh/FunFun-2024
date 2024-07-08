@@ -5,4 +5,5 @@ class Groups(Enum):
     LEDKAST_2 = "LEDKAST_2"
     LEDKAST_3 = "LEDKAST_3"
     LEDKAST_4 = "LEDKAST_4"
+    ALL = "ALL"
     

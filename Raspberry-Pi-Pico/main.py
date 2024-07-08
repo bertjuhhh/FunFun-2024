@@ -98,6 +98,14 @@ async def uart_listener():
                     dmxEffect, ledkast, rgbColor, bpm = line.split("-")
                     effect = Effect(dmxEffect, bpm, rgbColor)
                     
+                    # If a command is received to start an effect on all LEDKASTS
+                    if (ledkast == "ALL"):
+                        kasten = getAllLedkastsExceptExternal()
+                        for kast in kasten:
+                            await startCommand(kast.name, effect)
+                        
+                        continue
+                    
                     await startCommand(ledkast, effect)
             except Exception as e:
                 print(f"⚠️ An error occurred. Skipping... {e}")
