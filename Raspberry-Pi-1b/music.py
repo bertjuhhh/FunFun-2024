@@ -215,7 +215,7 @@ def main():
             
             currentRelativeTime = int(currentTime - startTime)
             
-            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song[0].replace(f"music/", "")}")
+            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song[0].replace('music/', '')}")
                 
             for event in active_song[1]:
                 if event.hasStopped:
