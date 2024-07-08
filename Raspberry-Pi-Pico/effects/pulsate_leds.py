@@ -4,7 +4,7 @@ async def pulsateLEDs(ledkast, color):
     brightness = 0
     direction = 1
     
-    while ledkast.isRunningEffect:
+    while True:
         for i in range(ledkast.strips.n):
             ledkast.strips[i] = (color[0] * brightness // 255, color[1] * brightness // 255, color[2] * brightness // 255)
             

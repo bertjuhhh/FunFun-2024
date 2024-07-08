@@ -2,7 +2,7 @@ import asyncio
 
 # A effect that turns all leds on and off
 async def bpmflashLEDs(ledkast, color, bpm):
-    while ledkast.isRunningEffect:
+    while True:
         for i in range(ledkast.strips.n):
             ledkast.strips[i] = color
 

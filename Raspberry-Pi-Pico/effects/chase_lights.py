@@ -11,7 +11,7 @@ async def ChaseLights(ledkast, color):
     global offset, movingUp, brightness
     speed = 200
     
-    while ledkast.isRunningEffect:
+    while True:
         brightnessLevels = [20, 20, 75, 100, 150, 180, 255, 255, 255, 180, 150, 100, 75, 20, 20]
 
         for i in range(ledkast.strips.n):

@@ -17,8 +17,6 @@ class Ledkast:
         self.pin = Pin(pin)
         self.name = name
         self.ledCount = ledCount
-        self.isActive = False
-        self.isRunningEffect = False
         self.current_task = None
         
         # We are misusing this to send the data using DMX cables to a separate device
@@ -36,12 +34,6 @@ class Ledkast:
                 print("Previous effect cancelled")
         
         self.clearLEDs()
-        self.isRunningEffect = False
-        
-        await asyncio.sleep(0.1)
-        
-        self.isRunningEffect = True
-        self.isActive = True
                 
         print(f"🚀 Starting effect {effect.name} on {self.name}")
         if effect.name == "CHASE":
@@ -55,12 +47,9 @@ class Ledkast:
         elif effect.name == "STATIC":
             print(f"Running static {effect.color}")
             staticLEDs(self.strips, effect.color)
-            self.isRunningEffect = False
         elif effect.name == "CLEAR":
             self.clearLEDs()
-            self.isRunningEffect = False
         else:
-            self.isActive = False
             print(f"⚠️ Invalid effect received. Skipping... {effect.name}")
             
     def clearLEDs(self):
@@ -68,7 +57,6 @@ class Ledkast:
             self.strips[i] = (0, 0, 0)
             
         self.strips.write()
-        self.isActive = False
     
     async def showStartupEffect(self):
         print(f"🚀 Starting startup effect on {self.name}")
