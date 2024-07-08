@@ -215,7 +215,7 @@ def main():
             
             currentRelativeTime = int(currentTime - startTime)
             
-            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song[0].replace('~/FunFun-2024/Raspberry-Pi-1b/music/', '')}")
+            writeLCD_line_1(f"{int((currentTime - startTime) / 1000)}s {active_song[0].replace('/home/bert/FunFun-2024/Raspberry-Pi-1b/music/', '')}")
                 
             for event in active_song[1]:
                 if event.hasStopped:
