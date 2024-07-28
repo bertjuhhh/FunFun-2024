@@ -1,7 +1,7 @@
 from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Groups import Groups
-from lib.Colors import blue, clear, lime, yellow, gold
+from lib.Colors import blue, clear, lime, yellow, gold, orange
 from lib.Groups import Groups
 
 # typed array
