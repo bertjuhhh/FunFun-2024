@@ -37,7 +37,7 @@ addEvent(111800, Effect.PULSATE, Groups.ALL, lime)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
-addPauzeEvent(0, Effect.THEATER_CHASE_RAINBOW, Groups.ALL, blue)
+addPauzeEvent(0, Effect.CHASE, Groups.ALL, orange)
 addPauzeEvent(13200, Effect.FLASH, Groups.ALL, blue)
 addPauzeEvent(14200, Effect.PULSATE, Groups.ALL, yellow)
 addPauzeEvent(16800, Effect.FLASH, Groups.ALL, blue)
