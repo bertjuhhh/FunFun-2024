@@ -4,8 +4,8 @@ movingUp = True
 brightness = 255
 
 # Chase light config
-LED_ON_OFF_COUNT = 1
-SPACING = 1
+LED_ON_OFF_COUNT = 10
+SPACING = 10
 
 async def ChaseLights(ledkast, color):
     global offset, movingUp, brightness
