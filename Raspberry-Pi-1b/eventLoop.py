@@ -2,7 +2,7 @@ from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Kasten import KASTEN
 from lib.Groups import outside_group, internal_indicators
-from lib.Colors import blue, clear, lime, yellow, gold, orange, red
+from lib.Colors import blue, clear, lime, yellow, gold, dark_orange, red
 
 # typed array
 eventLoop: list[TimedEvent] = []
@@ -41,19 +41,18 @@ def clearAll(loop):
 # Currently, only STATIC, FLASH and PULSATE are supported
 # Times in milliseconds    
 # 0 = infinite
-addSingle(eventLoop, 0, Effect.STATIC, KASTEN.ALL, clear)
-
-addToGroup(eventLoop, 0, Effect.STATIC, outside_group, orange)
-addToGroup(eventLoop, 27000, Effect.STATIC, outside_group, blue)
+# EXTERNAL
+addSingle(eventLoop, 0, Effect.STATIC, outside_group, lime)
+addSingle(eventLoop, 27000, Effect.PULSATE, outside_group, yellow)
 
 # BEWEGERS INDICATOREN
 addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
-
+addToGroup(eventLoop, 22000, Effect.STATIC, internal_indicators, dark_orange)
 addToGroup(eventLoop, 27000, Effect.STATIC, internal_indicators, lime)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
-addPauzeEvent(0, Effect.CHASE, KASTEN.ALL, orange)
+addPauzeEvent(0, Effect.CHASE, KASTEN.ALL, dark_orange)
 addPauzeEvent(13200, Effect.FLASH, KASTEN.ALL, blue)
 addPauzeEvent(14200, Effect.PULSATE, KASTEN.ALL, yellow)
 addPauzeEvent(16800, Effect.FLASH, KASTEN.ALL, blue)
