@@ -7,10 +7,14 @@ from lib.Groups import Groups
 # typed array
 eventLoop: list[TimedEvent] = []
 pauzeLoop: list[TimedEvent] = []
+discoLoop: list[TimedEvent] = []
 
 def addEvent(start, effect: Effect, group, color = None):
     event = TimedEvent(start=start, effect=effect, group=group, color=color)
     eventLoop.append(event)
+    
+def addEventToLoop(loop, start, effect: Effect, group, color = None):
+    loop.append(TimedEvent(start=start, effect=effect, group=group, color=color))
     
 def addPauzeEvent(start, effect: Effect, group, color = None):
     event = TimedEvent(start=start, effect=effect, group=group, color=color)
