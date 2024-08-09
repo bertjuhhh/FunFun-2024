@@ -55,7 +55,7 @@ def showStatus():
         selectedIndex = 3
     
     ledkast = ledkasten[selectedIndex]
-    
+        
     for i in range(10):
         indicatorStrip[i] = (0, 0, 0)
     
