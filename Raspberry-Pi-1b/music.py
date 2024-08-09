@@ -122,6 +122,7 @@ buttonEvents = [{
 }]
 
 def sendCommand(event: TimedEvent, currentRelativeTime):
+    global serial_buffer
     # Format the command and send it to the Pico
     command = f"{event.formatCommand()}-{active_song[2]}"
     
@@ -131,6 +132,7 @@ def sendCommand(event: TimedEvent, currentRelativeTime):
     serial_buffer += command + "\n"
     
 def sendBuffer():
+    global serial_buffer
     # Send the buffer to the Pico
     ser.write(serial_buffer.encode())
     serial_buffer = ""
