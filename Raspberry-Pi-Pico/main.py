@@ -5,7 +5,7 @@ from lib.Ledkast import Ledkast
 from lib.Effect import Effect
 import asyncio
 
-# Initialize POT meter, hi this changed.
+# Initialize POT meter
 pot = ADC(Pin(POTENTIOMETER_PIN))
 
 # Initialize UART (UART0 in Raspberry Pi Pico)
@@ -55,7 +55,7 @@ def showStatus():
         selectedIndex = 3
     
     ledkast = ledkasten[selectedIndex]
-        
+
     for i in range(10):
         indicatorStrip[i] = (0, 0, 0)
     
