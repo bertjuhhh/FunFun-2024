@@ -13,6 +13,6 @@ async def pulsateLEDs(ledkast, color):
         brightness += direction
         
         if brightness <= 0 or brightness >= 255:
-            direction *= -1
+            direction *= -10
             
         await asyncio.sleep(0.01)
