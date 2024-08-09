@@ -1,7 +1,7 @@
 from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Groups import Groups
-from lib.Colors import blue, clear, lime, yellow, gold
+from lib.Colors import blue, clear, lime, yellow, gold, orange
 from lib.Groups import Groups
 
 # typed array
@@ -41,11 +41,11 @@ addEvent(111800, Effect.PULSATE, Groups.ALL, lime)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
-addPauzeEvent(0, Effect.PULSATE, Groups.ALL, blue)
+addPauzeEvent(0, Effect.CHASE, Groups.ALL, orange)
 addPauzeEvent(13200, Effect.FLASH, Groups.ALL, blue)
 addPauzeEvent(14200, Effect.PULSATE, Groups.ALL, yellow)
 addPauzeEvent(16800, Effect.FLASH, Groups.ALL, blue)
-addPauzeEvent(17200, Effect.FLASH, Groups.ALL, blue)
+addPauzeEvent(17200, Effect.THEATER_CHASE_RAINBOW, Groups.ALL, blue)
 addPauzeEvent(18200, Effect.FLASH, Groups.ALL, blue)
 addPauzeEvent(18700, Effect.FLASH, Groups.ALL, blue)
 addPauzeEvent(19500, Effect.FLASH, Groups.ALL, blue)

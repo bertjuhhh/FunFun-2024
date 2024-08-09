@@ -10,12 +10,16 @@ UART_TX_PIN = 4
 UART_RX_PIN = 5
 UART_BAUDRATE = 9600
 
-LEDKAST_1 = Ledkast(pin=0, ledCount=10, name="LEDKAST_1")  # weet niet of dit helemaal goed is
-LEDKAST_2 = Ledkast(pin=1, ledCount=10, name="LEDKAST_2")  # weet niet of dit helemaal goed is
-LEDKAST_3 = Ledkast(pin=6, ledCount=10, name="LEDKAST_3")  # weet niet of dit helemaal goed is
-LEDKAST_4 = Ledkast(pin=3, ledCount=10, name="LEDKAST_4")  # weet niet of dit helemaal goed is
+LEDKAST_1 = Ledkast(pin=0, ledCount=150, name="LEDKAST_1")  # weet niet of dit helemaal goed is
+#LEDKAST_1b = Ledkast(pin=1, ledCount=10, name="LEDKAST_2")  # weet niet of dit helemaal goed is
+LEDKAST_2 = Ledkast(pin=2, ledCount=150, name="LEDKAST_2")  # weet niet of dit helemaal goed is
+#LEDKAST_2b = Ledkast(pin=3, ledCount=10, name="LEDKAST_2")  # weet niet of dit helemaal goed is
+LEDKAST_3 = Ledkast(pin=12, ledCount=150, name="LEDKAST_3")  # weet niet of dit helemaal goed is
+#LEDKAST_3b = Ledkast(pin=13, ledCount=10, name="LEDKAST_3")  # weet niet of dit helemaal goed is
+LEDKAST_4 = Ledkast(pin=14, ledCount=150, name="LEDKAST_4")  # weet niet of dit helemaal goed is
+#LEDKAST_4b = Ledkast(pin=15, ledCount=10, name="LEDKAST_4")  # weet niet of dit helemaal goed is
 # Indicators that are present on the hoofdkast
-EXTERNAL_INDICATORS = Ledkast(pin=2, ledCount=10 , name="EXTERNAL_INDICATORS")# Ledkast(board.GP6, 10) ool checken
+EXTERNAL_INDICATORS = Ledkast(pin=16, ledCount=10 , name="EXTERNAL_INDICATORS")# Ledkast(board.GP6, 10) ool checken
 
 def getLedkast(group: str):
     if group == "LEDKAST_1":
