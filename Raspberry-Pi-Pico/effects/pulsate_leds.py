@@ -21,10 +21,10 @@ async def pulsateLEDs(ledkast, color):
         # Reverse direction at bounds
         if brightness <= 0:
             brightness = 0
-            direction = 1
+            direction = 10
         elif brightness >= 255:
             brightness = 255
-            direction = -1
+            direction = -10
             
         # Delay to control pulsation speed
-        await asyncio.sleep(0.01)
+        await asyncio.sleep(0.001)
