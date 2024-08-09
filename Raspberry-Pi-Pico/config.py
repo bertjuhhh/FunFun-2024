@@ -48,4 +48,4 @@ def getAllLedkasts() -> list[Ledkast]:
     return [LEDKAST_1, LEDKAST_2, LEDKAST_3, LEDKAST_4, LEDKAST_1b, LEDKAST_2b, LEDKAST_3b, LEDKAST_4b, EXTERNAL_INDICATORS]
 
 def getAllLedkastsExceptExternal() -> list[Ledkast]:
-    return [LEDKAST_1, LEDKAST_2, LEDKAST_3, LEDKAST_4, LEDKAST_1b, LEDKAST_2b, LEDKAST_3b, LEDKAST_4b]
+    return [LEDKAST_1, LEDKAST_2, LEDKAST_3, LEDKAST_4]
