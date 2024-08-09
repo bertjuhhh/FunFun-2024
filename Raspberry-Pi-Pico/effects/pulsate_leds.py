@@ -1,18 +1,24 @@
 import asyncio
 
 async def pulsateLEDs(ledkast, color):
-    brightness = 0
-    direction = 1
+    n = ledkast.strips.n
+    current_led = 0
     
     while True:
-        for i in range(ledkast.strips.n):
-            ledkast.strips[i] = (color[0] * brightness // 255, color[1] * brightness // 255, color[2] * brightness // 255)
+        # Reset the entire strip to off
+        for i in range(n):
+            ledkast.strips[i] = (0, 0, 0)
+        
+        # Gradually light up the LEDs one by one
+        for i in range(current_led):
+            ledkast.strips[i] = color
+        
+        # Update the current LED position   
+        current_led += 1
+        
+        # If we've reached the end of the strip, reset the position
+        if current_led > n:
+            current_led = 0
             
         ledkast.strips.write()
-        
-        brightness += direction
-        
-        if brightness <= 0 or brightness >= 255:
-            direction *= -10
-            
-        await asyncio.sleep(0.01)
+        await asyncio.sleep(0.05)
