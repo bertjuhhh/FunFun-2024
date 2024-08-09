@@ -232,7 +232,6 @@ def main():
 
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, currentRelativeTime)
-                    writeLCD_line_2(f"{groupNumber} > START {event.effect.value}")
         sendBuffer()
         time.sleep(0.001)
                     
