@@ -41,7 +41,7 @@ def clearAll(loop):
 # Currently, only STATIC, FLASH and PULSATE are supported
 # Times in milliseconds    
 # 0 = infinite
-addToGroup(eventLoop, 0, Effect.STATIC, KASTEN.ALL, clear)
+addSingle(eventLoop, 0, Effect.STATIC, KASTEN.ALL, clear)
 
 addToGroup(eventLoop, 0, Effect.STATIC, outside_group, orange)
 addToGroup(eventLoop, 27000, Effect.STATIC, outside_group, blue)
