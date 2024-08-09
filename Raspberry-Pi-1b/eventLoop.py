@@ -40,23 +40,13 @@ def clearAll(loop):
 # 0 = infinite
 
 clearAll(eventLoop)
-addEventToLoop(eventLoop, 0, Effect.PULSATE, outside_group, lime)
-addEventToLoop(eventLoop, 46210, Effect.PULSATE, outside_group, gold)
-addEventToLoop(eventLoop, 111800, Effect.PULSATE, outside_group, lime)
+addEventToLoop(eventLoop, 0, Effect.STATIC, outside_group, orange)
+addEventToLoop(eventLoop, 27000, Effect.STATIC, outside_group, blue)
 
 # BEWEGERS INDICATOREN
 addEventToLoop(eventLoop, 0, Effect.STATIC, internal_indicators, red)
-addEventToLoop(eventLoop, 22000, Effect.STATIC, internal_indicators, orange)
-addEventToLoop(eventLoop, 27000, Effect.PULSATE, internal_indicators, gold)
 
-addEventToLoop(eventLoop, 40000, Effect.STATIC, internal_indicators, orange)
-addEventToLoop(eventLoop, 45000, Effect.PULSATE, internal_indicators, yellow)
-
-addEventToLoop(eventLoop, 65000, Effect.STATIC, internal_indicators, orange)
-addEventToLoop(eventLoop, 70000, Effect.PULSATE, internal_indicators, lime)
-
-addEventToLoop(eventLoop, 85000, Effect.STATIC, internal_indicators, orange)
-addEventToLoop(eventLoop, 90000, Effect.STATIC, internal_indicators, red)
+addEventToLoop(eventLoop, 27000, Effect.STATIC, internal_indicators, lime)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
