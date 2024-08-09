@@ -14,7 +14,7 @@ def addEventToLoop(loop, start, effect: Effect, group, color = None):
         loop.append(TimedEvent(start=start, effect=effect, group=kast, color=color))
     
 def addPauzeEvent(start, effect: Effect, group, color = None):
-    addEventToLoop(pauzeLoop, start, effect, group, color)
+    addEventToLoop(pauzeLoop, start, effect, [group], color)
     
 def clearAll(loop):
     group1 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.ALL, color=clear)
