@@ -1,9 +1,7 @@
-from enum import Enum
+from lib.Kasten import KASTEN
 
-class Groups(Enum):
-    LEDKAST_1 = "LEDKAST_1"
-    LEDKAST_2 = "LEDKAST_2"
-    LEDKAST_3 = "LEDKAST_3"
-    LEDKAST_4 = "LEDKAST_4"
-    ALL = "ALL"
-    
+# ledstrips buiten
+outside_group = [KASTEN.LEDKAST_1, KASTEN.LEDKAST_2, KASTEN.LEDKAST_3, KASTEN.LEDKAST_4b]
+
+# indicatoren voor de bewegers
+internal_indicators = [KASTEN.LEDKAST_1b, KASTEN.LEDKAST_2b, KASTEN.LEDKAST_3b, KASTEN.LEDKAST_4b]
