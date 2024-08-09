@@ -192,24 +192,24 @@ def main():
     
     # Main loop
     while True:
-        # Check for button presses
-        for buttonEvent in buttonEvents:
-            if not GPIO.input(buttonEvent["pin"]):
-                # Make sure the button press is not too fast
-                if millis() - last_button_press > 500:
-                    last_button_press = millis()
-                    buttonEvent["callback"]()
+        # # Check for button presses
+        # for buttonEvent in buttonEvents:
+        #     if not GPIO.input(buttonEvent["pin"]):
+        #         # Make sure the button press is not too fast
+        #         if millis() - last_button_press > 500:
+        #             last_button_press = millis()
+        #             buttonEvent["callback"]()
            
-        # Restart the current song if it has ended
-        # also ensure it is loaded
-        if not pygame.mixer.music.get_busy():
-            pygame.mixer.music.load(active_song[0])
-            pygame.mixer.music.play()
-            startTime = millis()
-            resetAllEffects(active_song[1])
+        # # Restart the current song if it has ended
+        # # also ensure it is loaded
+        # if not pygame.mixer.music.get_busy():
+        #     pygame.mixer.music.load(active_song[0])
+        #     pygame.mixer.music.play()
+        #     startTime = millis()
+        #     resetAllEffects(active_song[1])
            
         # Check every 500ms
-        if millis() - last_time >= 100:
+        if millis() - last_time >= 50:
             last_time = millis()
             currentTime = millis()
             
