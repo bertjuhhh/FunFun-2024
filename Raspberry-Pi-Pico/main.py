@@ -5,7 +5,7 @@ from lib.Ledkast import Ledkast
 from lib.Effect import Effect
 import asyncio
 
-# Initialize POT meter
+# Initialize POT meter, hi this changed.
 pot = ADC(Pin(POTENTIOMETER_PIN))
 
 # Initialize UART (UART0 in Raspberry Pi Pico)
