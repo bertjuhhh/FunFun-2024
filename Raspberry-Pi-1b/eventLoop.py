@@ -42,8 +42,8 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 # EXTERNAL
-addSingle(eventLoop, 0, Effect.STATIC, outside_group, lime)
-addSingle(eventLoop, 27000, Effect.PULSATE, outside_group, yellow)
+addToGroup(eventLoop, 0, Effect.STATIC, outside_group, lime)
+addToGroup(eventLoop, 27000, Effect.PULSATE, outside_group, yellow)
 
 # BEWEGERS INDICATOREN
 addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
