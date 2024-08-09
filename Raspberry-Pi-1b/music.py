@@ -20,6 +20,8 @@ Knop_mode = 8
 Knop_vorige = 9
 Knop_play_pauze = 11
 
+serial_buffer = ""
+
 # LCD configuration
 lcd_columns = 16
 lcd_rows = 2
@@ -126,9 +128,12 @@ def sendCommand(event: TimedEvent, currentRelativeTime):
     # If stop, make console color red else green
     print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
     
-    ser.write((command + "\n").encode())
+    serial_buffer += command + "\n"
     
-    return True
+def sendBuffer():
+    # Send the buffer to the Pico
+    ser.write(serial_buffer.encode())
+    serial_buffer = ""
 
 def writeLCD(line_1: str, line_2: str):
     global previous_lcd_message
@@ -226,6 +231,7 @@ def main():
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, currentRelativeTime)
                     writeLCD_line_2(f"{groupNumber} > START {event.effect.value}")
+        sendBuffer()
         time.sleep(0.001)
                     
 main()
