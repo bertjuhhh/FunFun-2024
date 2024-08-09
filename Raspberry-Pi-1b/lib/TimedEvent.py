@@ -30,7 +30,7 @@ class TimedEvent:
         if (self.hasStarted):
             return False
         # make sure the event starts 200ms before the actual start time because of the delay in the DMX signal
-        shouldStart = self.start <= relativeCurrentTime - 1500 - relativeStartTime
+        shouldStart = self.start <= relativeCurrentTime + 1500 - relativeStartTime
 
         if shouldStart:
             self.hasStarted = True
