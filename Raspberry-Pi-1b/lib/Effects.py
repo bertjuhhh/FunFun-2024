@@ -10,7 +10,7 @@ class Effect(Enum):
     COLOR_WIPE = "COLOR_WIPE"
     SCANNER = "SCANNER"
     FADE = "FADE"
-    TWINKLE = "TWINKLE"
+    SPARKLE = "SPARKLE"
     FLASH = "FLASH"
     PULSATE = "PULSATE"
     CHASE = "CHASE"
