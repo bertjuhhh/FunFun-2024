@@ -9,12 +9,15 @@ eventLoop: list[TimedEvent] = []
 pauzeLoop: list[TimedEvent] = []
 discoLoop: list[TimedEvent] = []
 
-def addEventToLoop(loop, start, effect: Effect, group, color = None):
+def addToGroup(loop, start, effect: Effect, group, color = None):
     for kast in group:
         loop.append(TimedEvent(start=start, effect=effect, group=kast, color=color))
     
+def addSingle(loop, start, effect, kast, color):
+    loop.append(TimedEvent(start=start, effect=effect, group=kast, color=color))
+    
 def addPauzeEvent(start, effect: Effect, group, color = None):
-    addEventToLoop(pauzeLoop, start, effect, [group], color)
+    addToGroup(pauzeLoop, start, effect, [group], color)
     
 def clearAll(loop):
     group1 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.ALL, color=clear)
@@ -38,13 +41,15 @@ def clearAll(loop):
 # Currently, only STATIC, FLASH and PULSATE are supported
 # Times in milliseconds    
 # 0 = infinite
-addEventToLoop(eventLoop, 0, Effect.STATIC, outside_group, orange)
-addEventToLoop(eventLoop, 27000, Effect.STATIC, outside_group, blue)
+addToGroup(eventLoop, 0, Effect.STATIC, KASTEN.ALL, clear)
+
+addToGroup(eventLoop, 0, Effect.STATIC, outside_group, orange)
+addToGroup(eventLoop, 27000, Effect.STATIC, outside_group, blue)
 
 # BEWEGERS INDICATOREN
-addEventToLoop(eventLoop, 0, Effect.STATIC, internal_indicators, red)
+addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
 
-addEventToLoop(eventLoop, 27000, Effect.STATIC, internal_indicators, lime)
+addToGroup(eventLoop, 27000, Effect.STATIC, internal_indicators, lime)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
