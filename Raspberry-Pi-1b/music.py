@@ -209,7 +209,7 @@ def main():
             resetAllEffects(active_song[1])
            
         # Check every 500ms
-        if millis() - last_time >= 100:
+        if millis() - last_time >= 500:
             last_time = millis()
             currentTime = millis()
             
