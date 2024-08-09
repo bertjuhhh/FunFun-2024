@@ -209,7 +209,7 @@ def main():
             resetAllEffects(active_song[1])
            
         # Check every 500ms
-        if millis() - last_time >= 20:
+        if millis() - last_time >= 500:
             last_time = millis()
             currentTime = millis()
             
@@ -226,6 +226,6 @@ def main():
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, currentRelativeTime)
                     writeLCD_line_2(f"{groupNumber} > START {event.effect.value}")
-        time.sleep(0.05)
+        time.sleep(0.01)
                     
 main()
