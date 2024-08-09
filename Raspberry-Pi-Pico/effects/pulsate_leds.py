@@ -11,7 +11,7 @@ async def pulsateLEDs(ledkast, color):
         
         # Gradually light up the LEDs one by one
         for i in range(current_led):
-            ledkast.strips[i] = color
+            ledkast.strips[i] = (255, 0, 0)
         
         # Update the current LED position   
         current_led += 1
