@@ -42,23 +42,23 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 # EXTERNAL
-addSingle(eventLoop, 0, Effect.SPARKLE, KASTEN.LEDKAST_4, lime)
-addSingle(eventLoop, 28000, Effect.SPARKLE, KASTEN.LEDKAST_4, yellow)
-addSingle(eventLoop, 45000, Effect.PULSATE, KASTEN.LEDKAST_4, yellow)
+addToGroup(eventLoop, 0, Effect.SPARKLE, outside_group, lime)
+addToGroup(eventLoop, 28000, Effect.SPARKLE, outside_group, yellow)
+addToGroup(eventLoop, 45000, Effect.PULSATE, outside_group, yellow)
 
 # BEWEGERS INDICATOREN
-addSingle(eventLoop, 0, Effect.STATIC, KASTEN.LEDKAST_4b, red)
-addSingle(eventLoop, 23000, Effect.STATIC, KASTEN.LEDKAST_4b, dark_orange)
-addSingle(eventLoop, 28000, Effect.STATIC, KASTEN.LEDKAST_4b, lime)
+addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
+addToGroup(eventLoop, 23000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 28000, Effect.STATIC, internal_indicators, lime)
 
-addSingle(eventLoop, 40000, Effect.STATIC, KASTEN.LEDKAST_4b, dark_orange)
-addSingle(eventLoop, 45000, Effect.STATIC, KASTEN.LEDKAST_4b, lime)
+addToGroup(eventLoop, 40000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 45000, Effect.STATIC, internal_indicators, lime)
 
-addSingle(eventLoop, 65000, Effect.STATIC, KASTEN.LEDKAST_4b, dark_orange)
-addSingle(eventLoop, 70000, Effect.STATIC, KASTEN.LEDKAST_4b, lime)
+addToGroup(eventLoop, 65000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 70000, Effect.STATIC, internal_indicators, lime)
 
-addSingle(eventLoop, 83000, Effect.STATIC, KASTEN.LEDKAST_4b, dark_orange)
-addSingle(eventLoop, 90000, Effect.STATIC, KASTEN.LEDKAST_4b, red)
+addToGroup(eventLoop, 83000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 90000, Effect.STATIC, internal_indicators, red)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
