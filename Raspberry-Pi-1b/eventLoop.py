@@ -42,7 +42,7 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 # EXTERNAL
-addToGroup(eventLoop, 0, Effect.SPARKLE, outside_group, lime)
+addToGroup(eventLoop, 0, Effect.PULSATE, outside_group, lime)
 
 # BEWEGERS INDICATOREN
 addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
