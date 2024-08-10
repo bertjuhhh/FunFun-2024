@@ -121,7 +121,7 @@ buttonEvents = [{
     "callback": knop_play_pauze_event
 }]
 
-def sendCommand(event: TimedEvent, currentRelativeTime):
+def sendCommand(event, currentRelativeTime):
     global serial_buffer
     # Format the command and send it to the Pico
     command = f"{event.formatCommand()}-{active_song[2]}"
