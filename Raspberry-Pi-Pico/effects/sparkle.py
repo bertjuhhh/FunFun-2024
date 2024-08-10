@@ -1,7 +1,7 @@
 import asyncio
 import random
 
-async def sparkle(ledkast, color, num_sparkles=10):
+async def sparkle(ledkast, color, num_sparkles=35):
     while True:
         # Pick multiple random LEDs to sparkle
         sparkle_indices = random.sample(range(len(ledkast)), num_sparkles)
