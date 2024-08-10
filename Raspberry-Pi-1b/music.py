@@ -99,9 +99,7 @@ def knop_vorige_event():
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_1
-    
-    resetAllEffects(MP3_FILE_1[1])
-    
+        
     writeLCD_line_2("GO > Main")
     startTime = millis()  
     
@@ -117,9 +115,7 @@ def knop_play_pauze_event():
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_1
-    
-    resetAllEffects(MP3_FILE_1[1])
-    
+        
     writeLCD_line_2("GO > Main")
     
     startTime = millis()
@@ -182,12 +178,6 @@ def writeLCD_line_2(line_2: str):
 def millis():
     return time.time() * 1000
 
-# This makes sure all effects are reset and can be started again
-def resetAllEffects(loop):
-    for event in loop:
-        event.hasStarted = False
-        event.hasStopped = False
-
 startTime = millis()
 
 def main():
@@ -231,7 +221,6 @@ def main():
             pygame.mixer.music.load(active_song[0])
             pygame.mixer.music.play()
             startTime = millis()
-            resetAllEffects(active_song[1])
            
         # Check every 500ms
         if millis() - last_time >= 50:
