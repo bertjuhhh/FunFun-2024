@@ -43,7 +43,15 @@ def clearAll(loop):
 # 0 = infinite
 # EXTERNAL
 addToGroup(mainLoop, 0, Effect.SPARKLE, outside_group, lime)
+addToGroup(mainLoop, 5000, Effect.SPARKLE, outside_group, lime)
+addToGroup(mainLoop, 10000, Effect.SPARKLE, outside_group, lime)
+addToGroup(mainLoop, 15000, Effect.SPARKLE, outside_group, lime)
+addToGroup(mainLoop, 20000, Effect.SPARKLE, outside_group, lime)
+addToGroup(mainLoop, 24000, Effect.SPARKLE, outside_group, lime)
 addToGroup(mainLoop, 28000, Effect.SPARKLE, outside_group, yellow)
+addToGroup(mainLoop, 33000, Effect.SPARKLE, outside_group, yellow)
+addToGroup(mainLoop, 38000, Effect.SPARKLE, outside_group, yellow)
+addToGroup(mainLoop, 41000, Effect.SPARKLE, outside_group, yellow)
 addToGroup(mainLoop, 45000, Effect.PULSATE, outside_group, yellow)
 
 # BEWEGERS INDICATOREN
