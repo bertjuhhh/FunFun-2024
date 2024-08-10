@@ -84,23 +84,6 @@ def knop_volgende_event():
     startTime = millis()
     
 def knop_mode_event():
-    # reset to the first song
-    global active_song, startTime
-    
-    if active_song == MP3_FILE_1:
-        return
-    
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load(MP3_FILE_1[0])
-    pygame.mixer.music.play()
-    
-    active_song = MP3_FILE_1
-    
-    resetAllEffects(MP3_FILE_1[1])
-    
-    writeLCD_line_2("GO > Main")
-    
-    startTime = millis()
     
     print("Mode knop")
     
@@ -123,6 +106,23 @@ def knop_vorige_event():
     startTime = millis()  
     
 def knop_play_pauze_event():
+        # reset to the first song
+    global active_song, startTime
+    
+    if active_song == MP3_FILE_1:
+        return
+    
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load(MP3_FILE_1[0])
+    pygame.mixer.music.play()
+    
+    active_song = MP3_FILE_1
+    
+    resetAllEffects(MP3_FILE_1[1])
+    
+    writeLCD_line_2("GO > Main")
+    
+    startTime = millis()
     print("Play/Pauze")
 
 buttonEvents = [{
