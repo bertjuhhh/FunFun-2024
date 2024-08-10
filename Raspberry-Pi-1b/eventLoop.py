@@ -48,16 +48,16 @@ addToGroup(eventLoop, 45000, Effect.PULSATE, outside_group, yellow)
 
 # BEWEGERS INDICATOREN
 addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
-addToGroup(eventLoop, 23000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(eventLoop, 28000, Effect.STATIC, internal_indicators, lime)
+addToGroup(eventLoop, 24000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 27000, Effect.STATIC, internal_indicators, lime)
 
-addToGroup(eventLoop, 40000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 42000, Effect.STATIC, internal_indicators, dark_orange)
 addToGroup(eventLoop, 45000, Effect.STATIC, internal_indicators, lime)
 
-addToGroup(eventLoop, 65000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 67000, Effect.STATIC, internal_indicators, dark_orange)
 addToGroup(eventLoop, 70000, Effect.STATIC, internal_indicators, lime)
 
-addToGroup(eventLoop, 83000, Effect.STATIC, internal_indicators, dark_orange)
+addToGroup(eventLoop, 87000, Effect.STATIC, internal_indicators, dark_orange)
 addToGroup(eventLoop, 90000, Effect.STATIC, internal_indicators, red)
 
 # EUROPAPA
