@@ -60,4 +60,4 @@ class Ledkast:
     
     async def showStartupEffect(self):
         print(f"🚀 Starting startup effect on {self.name}")
-        await startUpEffect(self.strips)
+        startUpEffect(self.strips)

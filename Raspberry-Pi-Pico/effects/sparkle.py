@@ -21,7 +21,7 @@ async def sparkle(ledkast, color, num_sparkles=10):
 async def sparkle_led(ledkast, color, index):
     # Fade in the LED
     for brightness in range(0, 256, 5):
-        ledkast[index] = (brightness * color[0] // 255, 
+        ledkast.strips[index] = (brightness * color[0] // 255, 
                           brightness * color[1] // 255, 
                           brightness * color[2] // 255)
         ledkast.strips.write()
