@@ -47,18 +47,18 @@ addSingle(eventLoop, 28000, Effect.SPARKLE, KASTEN.LEDKAST_4, yellow)
 addSingle(eventLoop, 45000, Effect.PULSATE, KASTEN.LEDKAST_4, yellow)
 
 # BEWEGERS INDICATOREN
-addToGroup(eventLoop, 0, Effect.STATIC, internal_indicators, red)
-addToGroup(eventLoop, 23000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(eventLoop, 28000, Effect.STATIC, internal_indicators, lime)
+addSingle(eventLoop, 0, Effect.STATIC, KASTEN.LEDKAST_4, red)
+addSingle(eventLoop, 23000, Effect.STATIC, KASTEN.LEDKAST_4, dark_orange)
+addSingle(eventLoop, 28000, Effect.STATIC, KASTEN.LEDKAST_4, lime)
 
-addToGroup(eventLoop, 40000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(eventLoop, 45000, Effect.STATIC, internal_indicators, lime)
+addSingle(eventLoop, 40000, Effect.STATIC, KASTEN.LEDKAST_4, dark_orange)
+addSingle(eventLoop, 45000, Effect.STATIC, KASTEN.LEDKAST_4, lime)
 
-addToGroup(eventLoop, 65000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(eventLoop, 70000, Effect.STATIC, internal_indicators, lime)
+addSingle(eventLoop, 65000, Effect.STATIC, KASTEN.LEDKAST_4, dark_orange)
+addSingle(eventLoop, 70000, Effect.STATIC, KASTEN.LEDKAST_4, lime)
 
-addToGroup(eventLoop, 83000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(eventLoop, 90000, Effect.STATIC, internal_indicators, red)
+addSingle(eventLoop, 83000, Effect.STATIC, KASTEN.LEDKAST_4, dark_orange)
+addSingle(eventLoop, 90000, Effect.STATIC, KASTEN.LEDKAST_4, red)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
