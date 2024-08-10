@@ -5,9 +5,7 @@ import adafruit_character_lcd.character_lcd as characterlcd
 import board
 import digitalio
 import serial
-from eventLoop import eventLoop, pauzeLoop
-import sys
-from lib.TimedEvent import TimedEvent
+from eventLoop import mainLoop, pauzeLoop
 
 # Configuration
 # Filename, loop, bpm
