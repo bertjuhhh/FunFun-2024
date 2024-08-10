@@ -77,9 +77,7 @@ def knop_volgende_event():
     pygame.mixer.music.play()
     
     active_song = MP3_FILE_2
-    
-    resetAllEffects(MP3_FILE_2[1])
-    
+        
     writeLCD_line_2("GO > Pauze")
     startTime = millis()
     
