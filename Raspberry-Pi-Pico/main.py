@@ -129,7 +129,7 @@ async def main():
     # Keep the main function running indefinitely
     while True:
         showStatus()
-        await asyncio.sleep(0.03)  # Update status at regular intervals
+        await asyncio.sleep(0.2)  # Update status at regular intervals
 
 if __name__ == "__main__":
     asyncio.run(main())
