@@ -60,8 +60,7 @@ addToGroup(eventLoop, 70000, Effect.STATIC, internal_indicators, lime)
 addToGroup(eventLoop, 83000, Effect.STATIC, internal_indicators, dark_orange)
 addToGroup(eventLoop, 90000, Effect.STATIC, internal_indicators, red)
 
-# PAUZE (Europapa)
-clearAll(pauzeLoop)
+# EUROPAPA
 addToGroup(pauzeLoop, 0, Effect.CHASE, outside_group, dark_orange)
 addToGroup(pauzeLoop, 13200, Effect.FLASH, outside_group, blue)
 addToGroup(pauzeLoop, 14200, Effect.PULSATE, outside_group, yellow)
