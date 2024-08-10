@@ -228,6 +228,7 @@ def main():
             pygame.mixer.music.load(active_song[0])
             pygame.mixer.music.play()
             startTime = millis()
+            resetAllEvents(active_song[1])
            
         # Check every 500ms
         if millis() - last_time >= 50:
