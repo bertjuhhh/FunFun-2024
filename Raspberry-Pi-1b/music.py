@@ -10,7 +10,7 @@ from eventLoop import mainLoop, pauzeLoop
 # Configuration
 # Filename, loop, bpm
 # All files should be at a sample rate of 48000 kHz
-MP3_FILE_1 = ("/home/bert/FunFun-2024/Raspberry-Pi-1b/music/levend_bewijs_final.ogg", eventLoop, 160)
+MP3_FILE_1 = ("/home/bert/FunFun-2024/Raspberry-Pi-1b/music/levend_bewijs_final.ogg", mainLoop, 160)
 MP3_FILE_2 = ("/home/bert/FunFun-2024/Raspberry-Pi-1b/music/europapa.ogg", pauzeLoop, 160)
 
 Knop_volgende = 7
