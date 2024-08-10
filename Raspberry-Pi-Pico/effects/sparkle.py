@@ -1,10 +1,19 @@
-import asyncio
 import random
+import uasyncio as asyncio
 
-async def sparkle(ledkast, color, num_sparkles=35):
+def sample(population, k):
+    """Return a k-length list of unique elements chosen from the population."""
+    population = list(population)
+    result = []
+    for _ in range(k):
+        idx = random.randint(0, len(population) - 1)
+        result.append(population.pop(idx))
+    return result
+
+async def sparkle(ledkast, color, num_sparkles=10):
     while True:
         # Pick multiple random LEDs to sparkle
-        sparkle_indices = random.sample(range(len(ledkast)), num_sparkles)
+        sparkle_indices = sample(range(ledkast.strips.n), num_sparkles)
         
         tasks = []
         for index in sparkle_indices:
@@ -16,24 +25,21 @@ async def sparkle(ledkast, color, num_sparkles=35):
         await asyncio.gather(*tasks)
 
         # Pause before the next set of sparkles
-        await asyncio.sleep(random.uniform(0.1, 0.5))
+        await asyncio.sleep(0.005)  # Reduced sleep duration for faster sparkles
 
 async def sparkle_led(ledkast, color, index):
-    # Fade in the LED
-    for brightness in range(0, 256, 5):
+    # Faster fade in the LED
+    for brightness in range(0, 256, 10):  # Increased step for faster brightness change
         ledkast.strips[index] = (brightness * color[0] // 255, 
                           brightness * color[1] // 255, 
                           brightness * color[2] // 255)
         ledkast.strips.write()
-        await asyncio.sleep(0.01)
+        await asyncio.sleep(0.005)  # Reduced sleep duration for faster transition
 
-    # Fade out the LED
-    for brightness in range(255, -1, -5):
+    # Faster fade out the LED
+    for brightness in range(255, -1, -10):  # Increased step for faster brightness change
         ledkast.strips[index] = (brightness * color[0] // 255, 
                           brightness * color[1] // 255, 
                           brightness * color[2] // 255)
         ledkast.strips.write()
-        await asyncio.sleep(0.01)
-
-# Example usage:
-# asyncio.run(sparkle(ledstrip, (255, 255, 255), num_sparkles=20))  # Sparkle 20 LEDs with white color
+        await asyncio.sleep(0.005)  # Reduced sleep duration for faster transition
