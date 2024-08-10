@@ -20,7 +20,7 @@ def addPauzeEvent(start, effect: Effect, group, color = None):
     addToGroup(pauzeLoop, start, effect, [group], color)
     
 def clearAll(loop):
-    group1 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.ALL, color=clear)
+    group1 = TimedEvent(start=0, effect=Effect.STATIC, group=outside_group, color=clear)
     group2 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_2, color=clear)
     group3 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_3, color=clear)
     group4 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_4, color=clear)
@@ -62,101 +62,101 @@ addToGroup(eventLoop, 90000, Effect.STATIC, internal_indicators, red)
 
 # PAUZE (Europapa)
 clearAll(pauzeLoop)
-addPauzeEvent(0, Effect.CHASE, KASTEN.ALL, dark_orange)
-addPauzeEvent(13200, Effect.FLASH, KASTEN.ALL, blue)
-addPauzeEvent(14200, Effect.PULSATE, KASTEN.ALL, yellow)
-addPauzeEvent(16800, Effect.FLASH, KASTEN.ALL, blue)
-addPauzeEvent(17200, Effect.THEATER_CHASE_RAINBOW, KASTEN.ALL, blue)
-addPauzeEvent(18200, Effect.FLASH, KASTEN.ALL, blue)
-addPauzeEvent(18700, Effect.FLASH, KASTEN.ALL, blue)
-addPauzeEvent(19500, Effect.FLASH, KASTEN.ALL, blue)
-addPauzeEvent(25230, Effect.BPMFLASH, KASTEN.ALL, blue)
-addPauzeEvent(43290, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(44750, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(46000, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(0, Effect.CHASE, outside_group, dark_orange)
+addToGroup(13200, Effect.FLASH, outside_group, blue)
+addToGroup(14200, Effect.PULSATE, outside_group, yellow)
+addToGroup(16800, Effect.FLASH, outside_group, blue)
+addToGroup(17200, Effect.THEATER_CHASE_RAINBOW, outside_group, blue)
+addToGroup(18200, Effect.FLASH, outside_group, blue)
+addToGroup(18700, Effect.FLASH, outside_group, blue)
+addToGroup(19500, Effect.FLASH, outside_group, blue)
+addToGroup(25230, Effect.BPMFLASH, outside_group, blue)
+addToGroup(43290, Effect.FLASH, outside_group, yellow)
+addToGroup(44750, Effect.FLASH, outside_group, yellow)
+addToGroup(46000, Effect.FLASH, outside_group, yellow)
 
 # verse marker
 chorus1_start = 49140
-addPauzeEvent(chorus1_start, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus1_start, Effect.BPMFLASH, outside_group, blue)
 
-addPauzeEvent(chorus1_start + 3560, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus1_start + 3920, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus1_start + 3560, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus1_start + 3920, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(chorus1_start + 5240, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus1_start + 5680, Effect.FLASH, KASTEN.ALL, yellow)
-
-
-addPauzeEvent(chorus1_start + 5900, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus1_start + 5240, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus1_start + 5680, Effect.FLASH, outside_group, yellow)
 
 
-addPauzeEvent(chorus1_start + 9640, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus1_start + 10040, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus1_start + 5900, Effect.BPMFLASH, outside_group, blue)
 
-addPauzeEvent(chorus1_start + 11160, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus1_start + 11510, Effect.FLASH, KASTEN.ALL, yellow)
 
-addPauzeEvent(chorus1_start + 12500, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus1_start + 9640, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus1_start + 10040, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(chorus1_start + 17380, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus1_start + 11160, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus1_start + 11510, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(chorus1_start + 18200, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus1_start + 12500, Effect.BPMFLASH, outside_group, blue)
+
+addToGroup(chorus1_start + 17380, Effect.FLASH, outside_group, yellow)
+
+addToGroup(chorus1_start + 18200, Effect.BPMFLASH, outside_group, blue)
 
 # EU, RO, PA
-addPauzeEvent(chorus1_start + 21130, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus1_start + 21830, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus1_start + 22590, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus1_start + 21130, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus1_start + 21830, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus1_start + 22590, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(chorus1_start + 23600, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus1_start + 23600, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(chorus1_start + 25000, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus1_start + 25000, Effect.BPMFLASH, outside_group, blue)
 
 verse2_marker = 73120
 
-addPauzeEvent(verse2_marker + 0, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(verse2_marker + 0, Effect.BPMFLASH, outside_group, blue)
 
 
 chorus2_marker = 97190
-addPauzeEvent(chorus2_marker, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus2_marker, Effect.BPMFLASH, outside_group, blue)
 
-addPauzeEvent(chorus2_marker + 3560, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus2_marker + 3920, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus2_marker + 3560, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus2_marker + 3920, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(chorus2_marker + 5240, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus2_marker + 5680, Effect.FLASH, KASTEN.ALL, yellow)
-
-
-addPauzeEvent(chorus2_marker + 5900, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus2_marker + 5240, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus2_marker + 5680, Effect.FLASH, outside_group, yellow)
 
 
-addPauzeEvent(chorus2_marker + 9640, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus2_marker + 10040, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus2_marker + 5900, Effect.BPMFLASH, outside_group, blue)
 
-addPauzeEvent(chorus2_marker + 11160, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus2_marker + 11510, Effect.FLASH, KASTEN.ALL, yellow)
 
-addPauzeEvent(chorus2_marker + 12500, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(chorus2_marker + 9640, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus2_marker + 10040, Effect.FLASH, outside_group, yellow)
+
+addToGroup(chorus2_marker + 11160, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus2_marker + 11510, Effect.FLASH, outside_group, yellow)
+
+addToGroup(chorus2_marker + 12500, Effect.BPMFLASH, outside_group, blue)
 
 # EU, RO, PA
-addPauzeEvent(chorus2_marker + 21130, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus2_marker + 21830, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(chorus2_marker + 22590, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(chorus2_marker + 21130, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus2_marker + 21830, Effect.FLASH, outside_group, yellow)
+addToGroup(chorus2_marker + 22590, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(120000, Effect.PULSATE, KASTEN.ALL, yellow)
-addPauzeEvent(133050, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(120000, Effect.PULSATE, outside_group, yellow)
+addToGroup(133050, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(135100, Effect.BPMFLASH, KASTEN.ALL, blue)
-addPauzeEvent(146720, Effect.BPMFLASH, KASTEN.ALL, yellow)
+addToGroup(135100, Effect.BPMFLASH, outside_group, blue)
+addToGroup(146720, Effect.BPMFLASH, outside_group, yellow)
 
-addPauzeEvent(14967, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(14967, Effect.BPMFLASH, outside_group, blue)
 
-addPauzeEvent(152010, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(152010, Effect.FLASH, outside_group, yellow)
 
-addPauzeEvent(153070, Effect.BPMFLASH, KASTEN.ALL, blue)
+addToGroup(153070, Effect.BPMFLASH, outside_group, blue)
 
 ending_marker = 155720
-addPauzeEvent(ending_marker + 0, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(ending_marker + 700, Effect.FLASH, KASTEN.ALL, yellow)
-addPauzeEvent(ending_marker + 1400, Effect.FLASH, KASTEN.ALL, yellow)
+addToGroup(ending_marker + 0, Effect.FLASH, outside_group, yellow)
+addToGroup(ending_marker + 700, Effect.FLASH, outside_group, yellow)
+addToGroup(ending_marker + 1400, Effect.FLASH, outside_group, yellow)
 
 # clear
-addPauzeEvent(ending_marker + 1600, Effect.STATIC, KASTEN.ALL, clear)
+addToGroup(ending_marker + 1600, Effect.STATIC, outside_group, clear)
