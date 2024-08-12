@@ -1,61 +1,55 @@
+import asyncio
 import random
-import uasyncio as asyncio
 
-def sample(population, k):
-    """Return a k-length list of unique elements chosen from the population."""
-    population = list(population)
-    result = []
-    for _ in range(k):
-        idx = random.randint(0, len(population) - 1)
-        result.append(population.pop(idx))
-    return result
+# Custom shuffle function
+def custom_shuffle(lst):
+    for i in range(len(lst) - 1, 0, -1):
+        j = random.randint(0, i)
+        lst[i], lst[j] = lst[j], lst[i]
 
-async def sparkle(ledkast, color, num_sparkles=10):
+async def sparkle(ledbox, sparkle_color, fade_steps=15, delay=0.01):
     while True:
-        # Pick multiple random LEDs to sparkle
-        sparkle_indices = sample(range(ledkast.strips.n), num_sparkles)
+        # Create a list of all LED indices
+        indices = list(range(ledbox.strips.n))
         
-        tasks = []
-        for index in sparkle_indices:
-            # Create a task for each LED to sparkle independently
-            task = asyncio.create_task(sparkle_led(ledkast, color, index))
-            tasks.append(task)
+        # Custom shuffle to randomize the order
+        custom_shuffle(indices)
         
-        # Wait for all the sparkle tasks to complete
-        await asyncio.gather(*tasks)
-
-        # Pause before the next set of sparkles
-        await asyncio.sleep(0.005)  # Reduced sleep duration for faster sparkles
+        # Turn on LEDs one by one quickly
+        for led_index in indices:
+            # Gradually increase the brightness for the current LED
+            for brightness in range(0, 256, fade_steps):
+                ledbox.strips[led_index] = (
+                    sparkle_color[0] * brightness // 255,
+                    sparkle_color[1] * brightness // 255,
+                    sparkle_color[2] * brightness // 255
+                )
+            ledbox.strips.write()
+            await asyncio.sleep(delay)
         
-        # After all sparkles, initiate a global fade out
-        await fade_out_all(ledkast)
+        # Small pause when all LEDs are fully lit
+        await asyncio.sleep(0.2)
+        
+        # Custom shuffle to randomize the order for fading out
+        custom_shuffle(indices)
+        
+        # Turn off LEDs one by one quickly
+        for led_index in indices:
+            # Gradually decrease the brightness for the current LED
+            for brightness in range(255, -1, -fade_steps):
+                ledbox.strips[led_index] = (
+                    sparkle_color[0] * brightness // 255,
+                    sparkle_color[1] * brightness // 255,
+                    sparkle_color[2] * brightness // 255
+                )
+            ledbox.strips.write()
+            await asyncio.sleep(delay)
+        
+        # Small pause when all LEDs are off
+        await asyncio.sleep(0.2)
 
-async def sparkle_led(ledkast, color, index):
-    # Faster fade in the LED
-    for brightness in range(0, 256, 10):  # Increased step for faster brightness change
-        ledkast.strips[index] = (brightness * color[0] // 255, 
-                          brightness * color[1] // 255, 
-                          brightness * color[2] // 255)
-        ledkast.strips.write()
-        await asyncio.sleep(0.005)  # Reduced sleep duration for faster transition
-
-    # Faster fade out the LED
-    for brightness in range(255, -1, -10):  # Increased step for faster brightness change
-        ledkast.strips[index] = (brightness * color[0] // 255, 
-                          brightness * color[1] // 255, 
-                          brightness * color[2] // 255)
-        ledkast.strips.write()
-        await asyncio.sleep(0.005)  # Reduced sleep duration for faster transition
-
-async def fade_out_all(ledkast):
-    # Gradually fade out all LEDs together
-    for brightness in range(255, -1, -5):  # Decrease brightness gradually
-        for i in range(ledkast.strips.n):
-            ledkast.strips[i] = (
-                brightness * ledkast.strips[i][0] // 255,
-                brightness * ledkast.strips[i][1] // 255,
-                brightness * ledkast.strips[i][2] // 255,
-            )
-        ledkast.strips.write()
-        await asyncio.sleep(0.01)  # Slow down the global fade-out
+# Example usage
+# Assuming you have initialized `ledbox` and it supports n LEDs:
+# sparkle_color = (255, 255, 255)  # White sparkle
+# asyncio.run(sparkle_loop(ledbox, sparkle_color))
 

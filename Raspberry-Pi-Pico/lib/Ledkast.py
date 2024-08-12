@@ -1,6 +1,6 @@
 import neopixel
 from lib.Effect import Effect
-from machine import Pin 
+from machine import Pin
 import asyncio
 import time
 
@@ -20,47 +20,69 @@ class Ledkast:
         self.ledCount = ledCount
         self.current_task = None
         
-        # We are misusing this to send the data using DMX cables to a separate device
-        # This is not the actual LED strip, but is used to generate a data signal that can
-        # be distributed over to four ledstrips per ledkast.
+        # Initialize the LED strip (simulated as DMX signal generator)
         self.strips = neopixel.NeoPixel(self.pin, ledCount)
         
-    async def startEffect(self, effect: Effect):
-        # Cancel any existing effect task
-        if self.current_task is not None:
-            self.current_task.cancel()
-            try:
-                await self.current_task
-            except asyncio.CancelledError:
-                print("Previous effect cancelled")
+        # Effect mapping dictionary
+        self.effect_map = {
+            "CHASE": self._start_chase,
+            "PULSATE": self._start_pulsate,
+            "FLASH": self._start_flash,
+            "BPMFLASH": self._start_bpmflash,
+            "SPARKLE": self._start_sparkle,
+            "STATIC": self._start_static,
+            "CLEAR": self.clearLEDs,
+        }
         
+    async def startEffect(self, effect: Effect):
+        if self.current_task:
+            # Check if the current task is not done and needs to be canceled
+            if not self.current_task.done():
+                self.current_task.cancel()
+                try:
+                    await self.current_task
+                except asyncio.CancelledError:
+                    print("Previous effect cancelled")
+                    
         self.clearLEDs()
-                
-        print(f"🚀 Starting effect {effect.name} on {self.name}")
-        if effect.name == "CHASE":
-            self.current_task = asyncio.create_task(ChaseLights(self, effect.color))
-        elif effect.name == "PULSATE":
-            self.current_task = asyncio.create_task(pulsateLEDs(self, effect.color))
-        elif effect.name == "FLASH":
-            self.current_task = asyncio.create_task(flashLEDs(self, effect.color))
-        elif effect.name == "BPMFLASH":
-            self.current_task = asyncio.create_task(bpmflashLEDs(self, effect.color, effect.bpm))
-        elif effect.name == "SPARKLE":
-            self.current_task = asyncio.create_task(sparkle(self, effect.color))
-        elif effect.name == "STATIC":
-            print(f"Running static {effect.color}")
-            staticLEDs(self.strips, effect.color)
-        elif effect.name == "CLEAR":
-            self.clearLEDs()
+        
+        # Start the new effect if it exists in the map
+        effect_func = self.effect_map.get(effect.name)
+        if effect_func:
+            print(f"🚀 Starting effect {effect.name} on {self.name}")
+            if effect.name in ["STATIC", "CLEAR"]:
+                # Direct call for non-coroutine functions
+                effect_func(effect.color)
+            else:
+                # Schedule coroutine effect tasks
+                self.current_task = asyncio.create_task(effect_func(effect))
         else:
             print(f"⚠️ Invalid effect received. Skipping... {effect.name}")
-            
-    def clearLEDs(self):
-        for i in range(self.strips.n):
-            self.strips[i] = (0, 0, 0)
-            
+
+    def clearLEDs(self, color=(0, 0, 0)):
+        self.strips.fill(color)
         self.strips.write()
     
     async def showStartupEffect(self):
         print(f"🚀 Starting startup effect on {self.name}")
         startUpEffect(self.strips)
+
+    # Effect start methods
+    async def _start_chase(self, effect: Effect):
+        await ChaseLights(self, effect.color)
+
+    async def _start_pulsate(self, effect: Effect):
+        await pulsateLEDs(self, effect.color)
+
+    async def _start_flash(self, effect: Effect):
+        await flashLEDs(self, effect.color)
+
+    async def _start_bpmflash(self, effect: Effect):
+        await bpmflashLEDs(self, effect.color, effect.bpm)
+
+    async def _start_sparkle(self, effect: Effect):
+        await sparkle(self, effect.color)
+
+    def _start_static(self, color):
+        staticLEDs(self.strips, color)
+
