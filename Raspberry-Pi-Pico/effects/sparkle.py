@@ -26,6 +26,9 @@ async def sparkle(ledkast, color, num_sparkles=10):
 
         # Pause before the next set of sparkles
         await asyncio.sleep(0.005)  # Reduced sleep duration for faster sparkles
+        
+        # After all sparkles, initiate a global fade out
+        await fade_out_all(ledkast)
 
 async def sparkle_led(ledkast, color, index):
     # Faster fade in the LED
@@ -43,3 +46,16 @@ async def sparkle_led(ledkast, color, index):
                           brightness * color[2] // 255)
         ledkast.strips.write()
         await asyncio.sleep(0.005)  # Reduced sleep duration for faster transition
+
+async def fade_out_all(ledkast):
+    # Gradually fade out all LEDs together
+    for brightness in range(255, -1, -5):  # Decrease brightness gradually
+        for i in range(ledkast.strips.n):
+            ledkast.strips[i] = (
+                brightness * ledkast.strips[i][0] // 255,
+                brightness * ledkast.strips[i][1] // 255,
+                brightness * ledkast.strips[i][2] // 255,
+            )
+        ledkast.strips.write()
+        await asyncio.sleep(0.01)  # Slow down the global fade-out
+
