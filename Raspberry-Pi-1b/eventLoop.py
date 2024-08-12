@@ -2,7 +2,7 @@ from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
 from lib.Kasten import KASTEN
 from lib.Groups import outside_group, internal_indicators
-from lib.Colors import blue, clear, lime, yellow, gold, dark_orange, red
+from lib.Colors import blue, clear, lime, yellow, gold, dark_orange, red, green
 
 # typed array
 mainLoop: list[TimedEvent] = []
@@ -42,23 +42,26 @@ def clearAll(loop):
 # Times in milliseconds    
 # 0 = infinite
 # EXTERNAL
-addToGroup(mainLoop, 0, Effect.SPARKLE, outside_group, lime)
-addToGroup(mainLoop, 28000, Effect.SPARKLE, outside_group, yellow)
-addToGroup(mainLoop, 45000, Effect.PULSATE, outside_group, yellow)
+addToGroup(mainLoop, 0, Effect.STATIC, outside_group, red)
+addToGroup(mainLoop, 3000, Effect.STATIC, outside_group, blue)
+addToGroup(mainLoop, 6000, Effect.STATIC, outside_group, green)
+#addToGroup(mainLoop, 0, Effect.SPARKLE, outside_group, lime)
+#addToGroup(mainLoop, 28000, Effect.SPARKLE, outside_group, yellow)
+#addToGroup(mainLoop, 45000, Effect.PULSATE, outside_group, yellow)
 
 # BEWEGERS INDICATOREN
-addToGroup(mainLoop, 0, Effect.STATIC, internal_indicators, red)
-addToGroup(mainLoop, 24000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(mainLoop, 27000, Effect.STATIC, internal_indicators, lime)
+#addToGroup(mainLoop, 0, Effect.STATIC, internal_indicators, red)
+#addToGroup(mainLoop, 24000, Effect.STATIC, internal_indicators, dark_orange)
+#addToGroup(mainLoop, 27000, Effect.STATIC, internal_indicators, lime)
 
-addToGroup(mainLoop, 42000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(mainLoop, 45000, Effect.STATIC, internal_indicators, lime)
+#addToGroup(mainLoop, 42000, Effect.STATIC, internal_indicators, dark_orange)
+#addToGroup(mainLoop, 45000, Effect.STATIC, internal_indicators, lime)
 
-addToGroup(mainLoop, 67000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(mainLoop, 70000, Effect.STATIC, internal_indicators, lime)
+#addToGroup(mainLoop, 67000, Effect.STATIC, internal_indicators, dark_orange)
+#addToGroup(mainLoop, 70000, Effect.STATIC, internal_indicators, lime)
 
-addToGroup(mainLoop, 87000, Effect.STATIC, internal_indicators, dark_orange)
-addToGroup(mainLoop, 90000, Effect.STATIC, internal_indicators, red)
+#addToGroup(mainLoop, 87000, Effect.STATIC, internal_indicators, dark_orange)
+#addToGroup(mainLoop, 90000, Effect.STATIC, internal_indicators, red)
 
 # EUROPAPA
 addToGroup(pauzeLoop, 0, Effect.CHASE, outside_group, dark_orange)
