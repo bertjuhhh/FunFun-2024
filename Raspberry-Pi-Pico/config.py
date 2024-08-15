@@ -19,11 +19,7 @@ LEDKAST_4 = Ledkast(pin=14, ledCount=300, name="LEDKAST_4")
 EXTERNAL_INDICATORS = Ledkast(pin=16, ledCount=10 , name="EXTERNAL_INDICATORS")# Ledkast(board.GP6, 10) ool checken
 
 def getLedkast(group: str):
-    if group == "None":
-        return None
-    elif group == "LEDKAST_2":
-        return None
-    elif group == "LEDKAST_3":
+    if group == "LEDKAST_3":
         return LEDKAST_3
     elif group == "LEDKAST_4":
         return LEDKAST_4
@@ -33,7 +29,7 @@ def getLedkast(group: str):
         return None
     
 def getAllLedkasts() -> list[Ledkast]:
-    return [None, None, LEDKAST_3, LEDKAST_4, None, None, EXTERNAL_INDICATORS]
+    return [LEDKAST_3, LEDKAST_4, EXTERNAL_INDICATORS]
 
 def getAllLedkastsExceptExternal() -> list[Ledkast]:
-    return [None, None, LEDKAST_3, LEDKAST_4]
+    return [LEDKAST_3, LEDKAST_4]

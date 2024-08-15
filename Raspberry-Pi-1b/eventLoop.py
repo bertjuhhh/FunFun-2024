@@ -1,7 +1,6 @@
 from lib.TimedEvent import TimedEvent
 from lib.Effects import Effect
-from lib.Kasten import KASTEN
-from lib.Groups import outside_group, internal_indicators
+from lib.Groups import outside_group
 from lib.Colors import blue, clear, lime, yellow, gold, dark_orange, red, green
 
 # typed array
@@ -18,25 +17,6 @@ def addSingle(loop, start, effect, kast, color):
     
 def addPauzeEvent(start, effect: Effect, group, color = None):
     addToGroup(pauzeLoop, start, effect, [group], color)
-    
-def clearAll(loop):
-    group1 = TimedEvent(start=0, effect=Effect.STATIC, group=outside_group, color=clear)
-    group2 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_2, color=clear)
-    group3 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_3, color=clear)
-    group4 = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_4, color=clear)
-    group1b = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_1b, color=clear)
-    group2b = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_2b, color=clear)
-    group3b = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_3b, color=clear)
-    group4b = TimedEvent(start=0, effect=Effect.STATIC, group=KASTEN.LEDKAST_4b, color=clear)
-    
-    loop.append(group1)
-    loop.append(group2)
-    loop.append(group3)
-    loop.append(group4)
-    loop.append(group1b)
-    loop.append(group2b)
-    loop.append(group3b)
-    loop.append(group4b)
     
 # Currently, only STATIC, FLASH and PULSATE are supported
 # Times in milliseconds    
