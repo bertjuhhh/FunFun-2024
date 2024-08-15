@@ -1,36 +1,31 @@
 import asyncio
-offset = 0
-movingUp = True
-brightness = 255
 
-# Chase light config
-LED_ON_OFF_COUNT = 10
-SPACING = 10
+async def chase(ledkast, color, line_length=5, speed=0.05):
+    position = 0
+    direction = 1
 
-async def ChaseLights(ledkast, color):
-    global offset, movingUp, brightness
-    speed = 200
-    
     while True:
-        brightnessLevels = [20, 20, 75, 100, 150, 180, 255, 255, 255, 180, 150, 100, 75, 20, 20]
-
+        # Clear the strip
         for i in range(ledkast.strips.n):
             ledkast.strips[i] = (0, 0, 0)
 
-        for i in range(ledkast.strips.n):
-            for j in range(LED_ON_OFF_COUNT):
-                brightness = brightnessLevels[j % len(brightnessLevels)]
-                if (i + j + offset) < ledkast.strips.n:
-                    ledkast.strips[i + j + offset] = color
-
-        if movingUp:
-            offset += 1
-            if offset >= LED_ON_OFF_COUNT:
-                movingUp = False
-        else:
-            offset -= 1
-            if offset <= 0:
-                movingUp = True
-
+        # Draw the moving line
+        for i in range(line_length):
+            if 0 <= position + i < ledkast.strips.n:
+                ledkast.strips[position + i] = color
+        
         ledkast.strips.write()
-        await asyncio.sleep(speed / 100.0)
+
+        # Update position
+        position += direction
+
+        # Reverse direction at bounds
+        if position <= 0:
+            position = 0
+            direction = 1
+        elif position + line_length >= ledkast.strips.n:
+            position = ledkast.strips.n - line_length
+            direction = -1
+
+        # Delay to control movement speed
+        await asyncio.sleep(speed)

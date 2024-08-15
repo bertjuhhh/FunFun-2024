@@ -5,7 +5,7 @@ import asyncio
 import time
 
 # Import all effects
-from effects.chase_lights import ChaseLights
+from effects.chase_lights import chase
 from effects.start_up import startUpEffect
 from effects.static import staticLEDs
 from effects.pulsate_leds import pulsateLEDs
@@ -69,7 +69,7 @@ class Ledkast:
 
     # Effect start methods
     async def _start_chase(self, effect: Effect):
-        await ChaseLights(self, effect.color)
+        await chase(self, effect.color)
 
     async def _start_pulsate(self, effect: Effect):
         await pulsateLEDs(self, effect.color)
