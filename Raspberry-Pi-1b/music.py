@@ -246,6 +246,6 @@ def main():
                 if event.shouldStart(currentTime, startTime):
                     sendCommand(event, currentRelativeTime)
         sendBuffer()
-        time.sleep(0.05)
+        time.sleep(0.01)
                     
 main()
