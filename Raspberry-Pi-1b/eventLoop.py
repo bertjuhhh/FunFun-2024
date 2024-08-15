@@ -60,7 +60,7 @@ addToGroup(mainLoop, 25000, Effect.FLASH, outside_group, lime)
 addToGroup(mainLoop, 28000, Effect.SPARKLE, outside_group, yellow)
 addToGroup(mainLoop, 45000, Effect.FLASH, outside_group, yellow)
 addToGroup(mainLoop, 48000, Effect.PULSATE, outside_group, yellow)
-addToGroup(mainLoop, 87000, Effect.FLASH, outside_group, yellow)
+addToGroup(mainLoop, 87000, Effect.FLASH, outside_group, lime)
 addToGroup(mainLoop, 90000, Effect.SPARKLE, outside_group, lime)
 
 
