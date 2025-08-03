@@ -6,6 +6,7 @@ import board
 import digitalio
 import serial
 from eventLoop import mainLoop, pauzeLoop
+from lib.DmxProcessor import dmx_processor
 
 # Configuration
 # Filename, loop, bpm
@@ -58,6 +59,13 @@ print("Pygame mixer initialized")
 # UART configuration
 ser = serial.Serial('/dev/serial0', 9600)
 print("UART initialized")
+
+# DMX configuration
+if dmx_processor.initialize():
+    dmx_processor.start()
+    print("DMX controller initialized")
+else:
+    print("⚠️ DMX controller initialization failed - DMX features disabled")
 
 lcd.clear()  # Clear the LCD screen
 previous_lcd_message = ("", "")
@@ -142,13 +150,18 @@ buttonEvents = [{
 
 def sendCommand(event, currentRelativeTime):
     global serial_buffer
-    # Format the command and send it to the Pico
-    command = f"{event.formatCommand()}-{active_song[2]}"
     
-    # If stop, make console color red else green
-    print(f"\033[92m{currentRelativeTime} | Command sent: {command} on group: {event.group.value}\033[0m")
-    
-    serial_buffer += command + "\n"
+    # Check if this is a DMX effect
+    if hasattr(event, 'is_dmx_effect') and event.is_dmx_effect():
+        # Handle DMX command directly
+        command = event.formatCommand()
+        print(f"\033[94m{currentRelativeTime} | DMX Command: {command} on device: {event.group.value}\033[0m")
+        dmx_processor.process_command(command, active_song[2])
+    else:
+        # Handle LED command via UART to Pico
+        command = f"{event.formatCommand()}-{active_song[2]}"
+        print(f"\033[92m{currentRelativeTime} | LED Command: {command} on group: {event.group.value}\033[0m")
+        serial_buffer += command + "\n"
     
 def sendBuffer():
     global serial_buffer

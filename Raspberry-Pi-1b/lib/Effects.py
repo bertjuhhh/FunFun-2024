@@ -2,6 +2,7 @@ from enum import Enum
 
 # These effects have been programmed on the Pico.
 class Effect(Enum):
+    # LED Strip Effects (Pico)
     STATIC = "STATIC"
     RAINBOW = "RAINBOW"
     RAINBOW_CYCLE = "RAINBOW_CYCLE"
@@ -19,4 +20,15 @@ class Effect(Enum):
     FADEIN = "FADEIN"
     FADEOUT = "FADEOUT"
     DIM = "DIM"
+    
+    # DMX Effects (Pi 1B)
+    DMX_DIMMER = "DMX_DIMMER"
+    DMX_STROBE = "DMX_STROBE"
+    DMX_BLACKOUT = "DMX_BLACKOUT"
+    DMX_COLOR = "DMX_COLOR"
+    DMX_FADE_UP = "DMX_FADE_UP"
+    DMX_FADE_DOWN = "DMX_FADE_DOWN"
+    DMX_FLASH = "DMX_FLASH"
+    DMX_PULSE = "DMX_PULSE"
+    DMX_CHASE = "DMX_CHASE"
     
