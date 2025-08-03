@@ -12,6 +12,8 @@ from effects.pulsate_leds import pulsateLEDs
 from effects.flash import flashLEDs
 from effects.bpmflash import bpmflashLEDs
 from effects.sparkle import sparkle
+from effects.fadeIn import fadeInOut, fadeIn, fadeOut
+from effects.dim import dim, dimToLevel
 
 class Ledkast:
     def __init__(self, pin, ledCount, name):
@@ -32,6 +34,10 @@ class Ledkast:
             "SPARKLE": self._start_sparkle,
             "STATIC": self._start_static,
             "CLEAR": self.clearLEDs,
+            "FADE": self._start_fade,
+            "FADEIN": self._start_fadein,
+            "FADEOUT": self._start_fadeout,
+            "DIM": self._start_dim,
         }
         
     async def startEffect(self, effect: Effect):
@@ -85,4 +91,16 @@ class Ledkast:
 
     def _start_static(self, color):
         staticLEDs(self.strips, color)
+
+    async def _start_fade(self, effect: Effect):
+        await fadeInOut(self, effect.color)
+
+    async def _start_fadein(self, effect: Effect):
+        await fadeIn(self, effect.color)
+
+    async def _start_fadeout(self, effect: Effect):
+        await fadeOut(self, effect.color)
+
+    async def _start_dim(self, effect: Effect):
+        await dim(self, effect.color)
 

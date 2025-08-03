@@ -16,4 +16,7 @@ class Effect(Enum):
     CHASE = "CHASE"
     CLEAR = "CLEAR"
     BPMFLASH = "BPMFLASH"
+    FADEIN = "FADEIN"
+    FADEOUT = "FADEOUT"
+    DIM = "DIM"
     
